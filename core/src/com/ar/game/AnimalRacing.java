@@ -1,6 +1,7 @@
 package com.ar.game;
 
 import com.ar.game.entity.Platform;
+import com.ar.game.entity.Player;
 import com.ar.game.handler.MyInputProcessor;
 import com.ar.game.system.Systems;
 import com.badlogic.ashley.core.Engine;
@@ -23,6 +24,7 @@ public class AnimalRacing extends ApplicationAdapter {
 
 	private void createEntities() {
 	    engine.addEntity(injector.getInstance(Platform.class));
+	    engine.addEntity(injector.getInstance(Player.class));
     }
 	
 	@Override
