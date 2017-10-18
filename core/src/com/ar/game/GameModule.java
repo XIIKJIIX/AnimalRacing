@@ -46,8 +46,8 @@ public class GameModule implements Module {
     @Singleton
     public OrthographicCamera camera() {
 
-        OrthographicCamera camera = new OrthographicCamera();
-        camera.setToOrtho(false, AnimalRacing.V_WIDTH, AnimalRacing.V_HEIGHT);
+        OrthographicCamera camera = new OrthographicCamera(AnimalRacing.V_WIDTH, AnimalRacing.V_HEIGHT);
+        camera.position.set(AnimalRacing.V_WIDTH / 2F , AnimalRacing.V_HEIGHT / 2F, 0);
         camera.update();
         return camera;
     }

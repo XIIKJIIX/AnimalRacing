@@ -22,13 +22,13 @@ public class Player extends Entity {
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         Body body = world.createBody(bodyDef);
 
-        shape.setAsBox(5, 5);
+        shape.setAsBox(0.5F, 0.5F);
         fixtureDef.shape = shape;
         fixtureDef.restitution = 0.5F;
         body.createFixture(fixtureDef);
         shape.dispose();
 
-        super.add(new TransformComponent(new Vector2(160F, 200F)));
+        super.add(new TransformComponent(new Vector2(15F, 18F)));
         TransformComponent transformComponent = Mapper.transform.get(this);
         body.setTransform(transformComponent.position, 0F);
 

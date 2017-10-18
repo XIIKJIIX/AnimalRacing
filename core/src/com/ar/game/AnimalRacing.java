@@ -16,8 +16,8 @@ public class AnimalRacing extends ApplicationAdapter {
 	SpriteBatch batch;
 	public static Texture img;
 	public static String TITLE = "Animal Racing";
-	public static int V_WIDTH = 320;
-	public static int V_HEIGHT = 240;
+	public static int V_WIDTH = 30;
+	public static int V_HEIGHT = 25;
 	public static int SCALE = 2;
 	Engine engine = new Engine();
 	private Injector injector;

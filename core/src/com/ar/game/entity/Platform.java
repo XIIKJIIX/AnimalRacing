@@ -24,10 +24,10 @@ public class Platform extends Entity {
         bodyDef.type = BodyDef.BodyType.StaticBody;
         Body body = this.world.createBody(bodyDef);
 
-        shape.setAsBox(50, 5);
+        shape.setAsBox(5F, 0.5F);
         fixtureDef.shape = shape;
         body.createFixture(fixtureDef);
-        super.add(new TransformComponent(new Vector2(160F, 120F)));
+        super.add(new TransformComponent(new Vector2(15F, 12.5F)));
 
         TransformComponent transformComponent = Mapper.transform.get(this);
         body.setTransform(transformComponent.position, 0F);

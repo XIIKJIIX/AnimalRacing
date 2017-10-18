@@ -8,8 +8,8 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.title = AnimalRacing.TITLE;
-		config.width = AnimalRacing.V_WIDTH * AnimalRacing.SCALE;
-		config.height = AnimalRacing.V_HEIGHT * AnimalRacing.SCALE;
+		config.width = 480 * AnimalRacing.SCALE;
+		config.height = 320 * AnimalRacing.SCALE;
 		new LwjglApplication(new AnimalRacing(), config);
 	}
 }
