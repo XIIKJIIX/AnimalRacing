@@ -1,5 +1,6 @@
 package com.ar.game;
 
+import com.ar.game.entity.Platform;
 import com.ar.game.handler.MyInputProcessor;
 import com.ar.game.system.Systems;
 import com.badlogic.ashley.core.Engine;
@@ -19,6 +20,10 @@ public class AnimalRacing extends ApplicationAdapter {
 	public static int SCALE = 2;
 	Engine engine = new Engine();
 	private Injector injector;
+
+	private void createEntities() {
+	    engine.addEntity(injector.getInstance(Platform.class));
+    }
 	
 	@Override
 	public void create () {
@@ -28,12 +33,13 @@ public class AnimalRacing extends ApplicationAdapter {
 		injector.getInstance(Systems.class).list.stream()
                 .map(systemClass -> injector.getInstance(systemClass))
                 .forEach(entitySystem -> engine.addSystem(entitySystem));
-		Gdx.input.setInputProcessor(injector.getInstance(MyInputProcessor.class));
+//		Gdx.input.setInputProcessor(injector.getInstance(MyInputProcessor.class));
+        createEntities();
 	}
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		engine.update(Gdx.graphics.getDeltaTime());
 	}

@@ -4,7 +4,6 @@ import com.ar.game.component.Mapper;
 import com.ar.game.component.PhysicsComponent;
 import com.ar.game.component.TransformComponent;
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.physics.box2d.Body;

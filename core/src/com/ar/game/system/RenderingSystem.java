@@ -7,6 +7,7 @@ import com.ar.game.component.TransformComponent;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -44,7 +45,7 @@ public class RenderingSystem extends IteratingSystem {
                     position.x - imgWidth / 32F / 2F,
                     position.y - imgHeight / 32F / 2F,
                     imgWidth / 32F,
-                    imgWidth / 32F
+                    imgHeight / 32F
             );
         }
         TextureRegionComponent textureRegionComponent = Mapper.textureRegion.get(entity);

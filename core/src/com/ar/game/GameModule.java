@@ -45,11 +45,9 @@ public class GameModule implements Module {
     @Provides
     @Singleton
     public OrthographicCamera camera() {
-        Integer viewPortWidth = Gdx.graphics.getWidth();
-        Integer viewPortHeight = Gdx.graphics.getHeight();
 
-        OrthographicCamera camera = new OrthographicCamera(viewPortWidth, viewPortHeight);
-        camera.position.set(viewPortWidth / 2F, viewPortHeight / 2F, 0F);
+        OrthographicCamera camera = new OrthographicCamera();
+        camera.setToOrtho(false, AnimalRacing.V_WIDTH, AnimalRacing.V_HEIGHT);
         camera.update();
         return camera;
     }
