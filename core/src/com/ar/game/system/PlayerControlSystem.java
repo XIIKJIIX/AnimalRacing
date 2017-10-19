@@ -9,6 +9,7 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -49,25 +50,25 @@ public class PlayerControlSystem extends IteratingSystem {
             if (xVelocity != 0) state.set(StateComponent.STATE_MOVING);
         }
 
-        if (controller.left)
+        if (controller.KEY_MAP.get(Keys.LEFT))
             physics.body.setLinearVelocity(
                     MathUtils.lerp(xVelocity, -5F, 0.2F),
                     yVelocity
                 );
 
-        if (controller.right)
+        if (controller.KEY_MAP.get(Keys.RIGHT))
             physics.body.setLinearVelocity(
                     MathUtils.lerp(xVelocity, 5F, 0.2F),
                     yVelocity
             );
 
-        if (!controller.left && !controller.right)
+        if (!controller.KEY_MAP.get(Keys.LEFT) && !controller.KEY_MAP.get(Keys.RIGHT))
             physics.body.setLinearVelocity(
                     MathUtils.lerp(xVelocity, 0F, 0.15F),
                     yVelocity
             );
 
-        if (controller.up && (state.get() == StateComponent.STATE_NORMAL || state.get() == StateComponent.STATE_MOVING)) {
+        if (controller.KEY_MAP.get(Keys.UP) && (state.get() == StateComponent.STATE_NORMAL || state.get() == StateComponent.STATE_MOVING)) {
             physics.body.applyLinearImpulse(0, 4F, worldCenter.x, worldCenter.y, true);
             state.set(StateComponent.STATE_JUMPING);
         }
