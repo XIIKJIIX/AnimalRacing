@@ -1,5 +1,6 @@
 package com.ar.game;
 
+import com.ar.game.component.PlayerComponent;
 import com.ar.game.entity.Platform;
 import com.ar.game.entity.Player;
 import com.ar.game.handler.KeyboardController;
@@ -7,9 +8,11 @@ import com.ar.game.system.Systems;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import static com.badlogic.gdx.Input.Keys.*;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.physics.box2d.World;
 import com.google.inject.*;
 
 public class AnimalRacing extends ApplicationAdapter {
@@ -25,7 +28,14 @@ public class AnimalRacing extends ApplicationAdapter {
 
 	private void createEntities() {
 	    engine.addEntity(injector.getInstance(Platform.class));
-	    engine.addEntity(injector.getInstance(Player.class));
+	    engine.addEntity(new Player(
+	            injector.getInstance(World.class),
+                new PlayerComponent(LEFT, RIGHT, UP, SHIFT_RIGHT, 300F)
+                ));
+        engine.addEntity(new Player(
+                injector.getInstance(World.class),
+                new PlayerComponent(A, D, W, Q, 300F)
+        ));
     }
 	
 	@Override

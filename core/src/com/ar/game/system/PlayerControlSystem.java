@@ -50,25 +50,25 @@ public class PlayerControlSystem extends IteratingSystem {
             if (xVelocity != 0) state.set(StateComponent.STATE_MOVING);
         }
 
-        if (controller.KEY_MAP.get(Keys.LEFT))
+        if (controller.KEY_MAP.get(player.leftKey))
             physics.body.setLinearVelocity(
                     MathUtils.lerp(xVelocity, -5F, 0.2F),
                     yVelocity
                 );
 
-        if (controller.KEY_MAP.get(Keys.RIGHT))
+        if (controller.KEY_MAP.get(player.rightKey))
             physics.body.setLinearVelocity(
                     MathUtils.lerp(xVelocity, 5F, 0.2F),
                     yVelocity
             );
 
-        if (!controller.KEY_MAP.get(Keys.LEFT) && !controller.KEY_MAP.get(Keys.RIGHT))
+        if (!controller.KEY_MAP.get(player.leftKey) && !controller.KEY_MAP.get(player.rightKey))
             physics.body.setLinearVelocity(
                     MathUtils.lerp(xVelocity, 0F, 0.15F),
                     yVelocity
             );
 
-        if (controller.KEY_MAP.get(Keys.UP) && (state.get() == StateComponent.STATE_NORMAL || state.get() == StateComponent.STATE_MOVING)) {
+        if (controller.KEY_MAP.get(player.upKey) && (state.get() == StateComponent.STATE_NORMAL || state.get() == StateComponent.STATE_MOVING)) {
             physics.body.applyLinearImpulse(0, 4F, worldCenter.x, worldCenter.y, true);
             state.set(StateComponent.STATE_JUMPING);
         }

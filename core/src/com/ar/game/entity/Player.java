@@ -6,13 +6,11 @@ import com.ar.game.component.*;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.google.inject.Inject;
 
 public class Player extends Entity {
     private World world;
 
-    @Inject
-    public Player(World world) {
+    public Player(World world, PlayerComponent player) {
         this.world = world;
 
         BodyDef bodyDef = new BodyDef();
@@ -33,7 +31,7 @@ public class Player extends Entity {
         body.setTransform(transformComponent.position, 0F);
 
         super.add(new PhysicsComponent(body));
-        super.add(new PlayerComponent());
+        super.add(player);
         super.add(new StateComponent());
     }
 }
