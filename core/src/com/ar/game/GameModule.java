@@ -1,8 +1,8 @@
 package com.ar.game;
 
 import com.ar.game.system.*;
+import static com.ar.game.constant.B2Dvars.*;
 import com.badlogic.ashley.core.Engine;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -46,8 +46,8 @@ public class GameModule implements Module {
     @Singleton
     public OrthographicCamera camera() {
 
-        OrthographicCamera camera = new OrthographicCamera(AnimalRacing.V_WIDTH, AnimalRacing.V_HEIGHT);
-        camera.position.set(AnimalRacing.V_WIDTH / 2F , AnimalRacing.V_HEIGHT / 2F, 0);
+        OrthographicCamera camera = new OrthographicCamera();
+        camera.setToOrtho(false, AnimalRacing.V_WIDTH / PPM , AnimalRacing.V_HEIGHT / PPM);
         camera.update();
         return camera;
     }

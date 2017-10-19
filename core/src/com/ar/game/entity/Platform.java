@@ -1,12 +1,11 @@
 package com.ar.game.entity;
 
+import static com.ar.game.constant.B2Dvars.*;
 import com.ar.game.AnimalRacing;
 import com.ar.game.component.Mapper;
 import com.ar.game.component.PhysicsComponent;
-import com.ar.game.component.TextureRegionComponent;
 import com.ar.game.component.TransformComponent;
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.google.inject.Inject;
@@ -24,10 +23,10 @@ public class Platform extends Entity {
         bodyDef.type = BodyDef.BodyType.StaticBody;
         Body body = this.world.createBody(bodyDef);
 
-        shape.setAsBox(5F, 0.5F);
+        shape.setAsBox(110F / PPM, 10F / PPM);
         fixtureDef.shape = shape;
         body.createFixture(fixtureDef);
-        super.add(new TransformComponent(new Vector2(15F, 12.5F)));
+        super.add(new TransformComponent(new Vector2(640F / PPM, 360F / PPM)));
 
         TransformComponent transformComponent = Mapper.transform.get(this);
         body.setTransform(transformComponent.position, 0F);

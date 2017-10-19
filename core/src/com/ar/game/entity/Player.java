@@ -1,5 +1,6 @@
 package com.ar.game.entity;
 
+import static com.ar.game.constant.B2Dvars.*;
 import com.ar.game.component.Mapper;
 import com.ar.game.component.PhysicsComponent;
 import com.ar.game.component.TransformComponent;
@@ -22,13 +23,13 @@ public class Player extends Entity {
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         Body body = world.createBody(bodyDef);
 
-        shape.setAsBox(0.5F, 0.5F);
+        shape.setAsBox(20F / PPM, 20F / PPM);
         fixtureDef.shape = shape;
         fixtureDef.restitution = 0.5F;
         body.createFixture(fixtureDef);
         shape.dispose();
 
-        super.add(new TransformComponent(new Vector2(15F, 18F)));
+        super.add(new TransformComponent(new Vector2(640F / PPM, 520F / PPM)));
         TransformComponent transformComponent = Mapper.transform.get(this);
         body.setTransform(transformComponent.position, 0F);
 
