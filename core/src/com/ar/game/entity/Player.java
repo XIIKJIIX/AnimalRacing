@@ -1,9 +1,8 @@
 package com.ar.game.entity;
 
 import static com.ar.game.constant.B2Dvars.*;
-import com.ar.game.component.Mapper;
-import com.ar.game.component.PhysicsComponent;
-import com.ar.game.component.TransformComponent;
+
+import com.ar.game.component.*;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
@@ -34,5 +33,7 @@ public class Player extends Entity {
         body.setTransform(transformComponent.position, 0F);
 
         super.add(new PhysicsComponent(body));
+        super.add(new PlayerComponent());
+        super.add(new StateComponent());
     }
 }

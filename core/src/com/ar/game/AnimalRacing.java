@@ -2,7 +2,7 @@ package com.ar.game;
 
 import com.ar.game.entity.Platform;
 import com.ar.game.entity.Player;
-import com.ar.game.handler.MyInputProcessor;
+import com.ar.game.handler.KeyboardController;
 import com.ar.game.system.Systems;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.ApplicationAdapter;
@@ -20,6 +20,7 @@ public class AnimalRacing extends ApplicationAdapter {
 	public static int V_HEIGHT = 720;
 	public static int SCALE = 2;
 	Engine engine = new Engine();
+	public static KeyboardController controller = new KeyboardController();
 	private Injector injector;
 
 	private void createEntities() {
@@ -35,7 +36,7 @@ public class AnimalRacing extends ApplicationAdapter {
 		injector.getInstance(Systems.class).list.stream()
                 .map(systemClass -> injector.getInstance(systemClass))
                 .forEach(entitySystem -> engine.addSystem(entitySystem));
-//		Gdx.input.setInputProcessor(injector.getInstance(MyInputProcessor.class));
+		Gdx.input.setInputProcessor(controller);
         createEntities();
 	}
 

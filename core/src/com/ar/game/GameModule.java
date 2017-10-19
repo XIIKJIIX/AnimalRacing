@@ -1,5 +1,6 @@
 package com.ar.game;
 
+import com.ar.game.handler.KeyboardController;
 import com.ar.game.system.*;
 import static com.ar.game.constant.B2Dvars.*;
 import com.badlogic.ashley.core.Engine;
@@ -27,6 +28,7 @@ public class GameModule implements Module {
         binder.requireAtInjectOnConstructors();
         binder.requireExactBindingAnnotations();
         binder.bind(SpriteBatch.class).toInstance(animalRacing.batch);
+        binder.bind(KeyboardController.class).toInstance(animalRacing.controller);
     }
 
     @Provides
@@ -57,6 +59,7 @@ public class GameModule implements Module {
     public Systems systems() {
         return new Systems(Arrays.asList(
                 RenderingSystem.class,
+                PlayerControlSystem.class,
                 PhysicsDebugSystem.class,
                 PhysicsSystem.class,
                 PhysicsSynchronizationSystem.class
