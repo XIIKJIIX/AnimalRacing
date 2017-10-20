@@ -1,6 +1,7 @@
 package com.ar.game;
 
 import com.ar.game.component.PlayerComponent;
+import com.ar.game.component.TypeComponent;
 import com.ar.game.entity.Platform;
 import com.ar.game.entity.Player;
 import com.ar.game.handler.KeyboardController;
@@ -31,7 +32,7 @@ public class AnimalRacing extends ApplicationAdapter {
 	    engine.addEntity(new Player(
 	            injector.getInstance(World.class),
                 new PlayerComponent(LEFT, RIGHT, UP, SHIFT_RIGHT, 300F)
-                ));
+        ));
         engine.addEntity(new Player(
                 injector.getInstance(World.class),
                 new PlayerComponent(A, D, W, Q, 300F)

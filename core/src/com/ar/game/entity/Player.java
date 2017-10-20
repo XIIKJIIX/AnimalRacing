@@ -26,10 +26,13 @@ public class Player extends Entity {
         body.createFixture(fixtureDef);
         shape.dispose();
 
-        super.add(new TransformComponent(new Vector2(640F / PPM, 520F / PPM)));
-        TransformComponent transformComponent = Mapper.transform.get(this);
-        body.setTransform(transformComponent.position, 0F);
 
+        TransformComponent transformComponent = new TransformComponent(new Vector2(640F / PPM, 520F / PPM));
+        body.setTransform(transformComponent.position, 0F);
+        // Set user data of body to this entity for handling collide
+        body.setUserData(this);
+
+        super.add(transformComponent);
         super.add(new PhysicsComponent(body));
         super.add(player);
         super.add(new StateComponent());
