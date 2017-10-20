@@ -1,5 +1,6 @@
 package com.ar.game;
 
+import com.ar.game.handler.CollisionDetector;
 import com.ar.game.handler.KeyboardController;
 import com.ar.game.system.*;
 import static com.ar.game.constant.B2Dvars.*;
@@ -41,7 +42,9 @@ public class GameModule implements Module {
     @Singleton
     public World world() {
         Box2D.init();
-        return new World(new Vector2(0F, -9.81F), true);
+        World world = new World(new Vector2(0F, -9.81F), true);
+        world.setContactListener(new CollisionDetector());
+        return world;
     }
 
     @Provides
@@ -58,6 +61,7 @@ public class GameModule implements Module {
     @Singleton
     public Systems systems() {
         return new Systems(Arrays.asList(
+                CollisionSystem.class,
                 RenderingSystem.class,
                 PlayerControlSystem.class,
                 PhysicsDebugSystem.class,

@@ -28,14 +28,16 @@ public class AnimalRacing extends ApplicationAdapter {
 	private Injector injector;
 
 	private void createEntities() {
-	    engine.addEntity(injector.getInstance(Platform.class));
+	    engine.addEntity(new Platform(injector.getInstance(World.class)));
 	    engine.addEntity(new Player(
 	            injector.getInstance(World.class),
-                new PlayerComponent(LEFT, RIGHT, UP, SHIFT_RIGHT, 300F)
+                new PlayerComponent(LEFT, RIGHT, UP, SHIFT_RIGHT, 300F),
+                new TypeComponent(TypeComponent.PLAYER)
         ));
         engine.addEntity(new Player(
                 injector.getInstance(World.class),
-                new PlayerComponent(A, D, W, Q, 300F)
+                new PlayerComponent(A, D, W, Q, 300F),
+                new TypeComponent(TypeComponent.PLAYER)
         ));
     }
 	

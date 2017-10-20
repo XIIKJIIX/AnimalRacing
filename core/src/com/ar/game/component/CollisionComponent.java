@@ -4,5 +4,13 @@ import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
 
 public class CollisionComponent implements Component {
-    public Entity collidedEntity;
+    private Entity collidedEntity;
+
+    public Entity getCollidedEntity() {
+        return collidedEntity;
+    }
+
+    public void setCollidedEntity(Entity collidedEntity) {
+        this.collidedEntity = collidedEntity;
+    }
 }

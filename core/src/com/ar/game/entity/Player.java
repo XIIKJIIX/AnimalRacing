@@ -10,7 +10,9 @@ import com.badlogic.gdx.physics.box2d.*;
 public class Player extends Entity {
     private World world;
 
-    public Player(World world, PlayerComponent player) {
+    public Player(World world,
+                  PlayerComponent player,
+                  TypeComponent type) {
         this.world = world;
 
         BodyDef bodyDef = new BodyDef();
@@ -23,6 +25,7 @@ public class Player extends Entity {
         shape.setAsBox(20F / PPM, 20F / PPM);
         fixtureDef.shape = shape;
         fixtureDef.restitution = 0.5F;
+        fixtureDef.filter.groupIndex = type.getGroup();
         body.createFixture(fixtureDef);
         shape.dispose();
 
@@ -33,8 +36,10 @@ public class Player extends Entity {
         body.setUserData(this);
 
         super.add(transformComponent);
-        super.add(new PhysicsComponent(body));
+        super.add(new PhysicsComponent(body, "Player"));
         super.add(player);
+        super.add(type);
+        super.add(new CollisionComponent());
         super.add(new StateComponent());
     }
 }

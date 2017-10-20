@@ -3,20 +3,24 @@ package com.ar.game.component;
 import com.badlogic.ashley.core.Component;
 
 public class TypeComponent implements Component {
-    // Categories bits
-    public static final short PLAYER_1 = 2;
-    public static final short PLAYER_2 = 4;
-    public static final short SCENERY = 8;
+    // Categories groupIndex bits
+    public static final short PLAYER = 2;
+    public static final short SCENERY = 4;
+    // Never collide in same group if Negative
+    public static final short SKILL = -2;
+    public static final short ITEM = -4;
 
-    private short type;
+    private short group;
 
-    public TypeComponent(short type) {
-        this.type = type;
+    public TypeComponent(short group) {
+        this.group = group;
     }
 
-    public void set(short type) {
-        this.type = type;
+    public short getGroup() {
+        return group;
     }
 
-    public short get() { return this.type; }
+    public void setGroup(short group) {
+        this.group = group;
+    }
 }

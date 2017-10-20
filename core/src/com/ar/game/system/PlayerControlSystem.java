@@ -17,23 +17,17 @@ import com.google.inject.Inject;
 
 public class PlayerControlSystem extends IteratingSystem {
     private KeyboardController controller;
-    private ComponentMapper<StateComponent> stateMapper;
-    private ComponentMapper<PlayerComponent> playerMapper;
-    private ComponentMapper<PhysicsComponent> physicsMapper;
 
     @Inject
     public PlayerControlSystem(KeyboardController controller) {
         super(Family.all(PlayerComponent.class).get());
         this.controller = controller;
-        this.stateMapper = Mapper.state;
-        this.playerMapper = Mapper.player;
-        this.physicsMapper = Mapper.physics;
     }
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        StateComponent state = stateMapper.get(entity);
-        PlayerComponent player = playerMapper.get(entity);
-        PhysicsComponent physics = physicsMapper.get(entity);
+        StateComponent state = Mapper.state.get(entity);
+        PlayerComponent player = Mapper.player.get(entity);
+        PhysicsComponent physics = Mapper.physics.get(entity);
 
         float yVelocity = physics.body.getLinearVelocity().y;
         float xVelocity = physics.body.getLinearVelocity().x;
