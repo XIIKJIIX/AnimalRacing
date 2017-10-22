@@ -11,8 +11,12 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import static com.badlogic.gdx.Input.Keys.*;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.google.inject.*;
 
@@ -21,7 +25,7 @@ public class AnimalRacing extends ApplicationAdapter {
 	public static Texture img;
 	public static String TITLE = "Animal Racing";
 	public static int V_WIDTH = 1280;
-	public static int V_HEIGHT = 720;
+	public static int V_HEIGHT = 800;
 	public static int SCALE = 2;
 	Engine engine = new Engine();
 	public static KeyboardController controller = new KeyboardController();

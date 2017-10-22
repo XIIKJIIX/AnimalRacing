@@ -8,10 +8,14 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.google.inject.Inject;
@@ -19,6 +23,8 @@ import com.google.inject.Inject;
 public class RenderingSystem extends IteratingSystem {
     private SpriteBatch batch;
     private OrthographicCamera camera;
+    private TiledMap tiledMap;
+    private OrthogonalTiledMapRenderer tmr;
 
     @Inject
     public RenderingSystem(SpriteBatch batch, OrthographicCamera camera) {
@@ -28,6 +34,8 @@ public class RenderingSystem extends IteratingSystem {
         );
         this.batch = batch;
         this.camera = camera;
+        tiledMap = new TmxMapLoader().load("try.tmx");
+        tmr = new OrthogonalTiledMapRenderer(tiledMap, 0.05f);
     }
 
     @Override
@@ -73,8 +81,27 @@ public class RenderingSystem extends IteratingSystem {
     @Override
     public void update(float deltaTime) {
         batch.setProjectionMatrix(camera.combined);
+        tmr.setView(camera);
+        tmr.render();
         batch.begin();
         super.update(deltaTime);
         batch.end();
+        if (Gdx.input.isKeyPressed(Input.Keys.F)){
+            camera.position.y +=1f;
+            System.out.println("Y: "+camera.position.y);
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.V)){
+            camera.position.y -=1f;
+            System.out.println("Y: "+camera.position.y);
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.C)){
+            camera.position.x -=1f;
+            System.out.println("X: "+camera.position.x);
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.B)){
+            camera.position.x +=1f;
+            System.out.println("X: "+camera.position.x);
+        }
+        camera.update();
     }
 }
