@@ -20,6 +20,8 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.google.inject.Inject;
 
+import static com.ar.game.constant.B2Dvars.PPM;
+
 public class RenderingSystem extends IteratingSystem {
     private SpriteBatch batch;
     private OrthographicCamera camera;
@@ -35,7 +37,7 @@ public class RenderingSystem extends IteratingSystem {
         this.batch = batch;
         this.camera = camera;
         tiledMap = new TmxMapLoader().load("try.tmx");
-        tmr = new OrthogonalTiledMapRenderer(tiledMap, 0.05f);
+        tmr = new OrthogonalTiledMapRenderer(tiledMap, (float) 1 / PPM);
     }
 
     @Override
@@ -86,21 +88,10 @@ public class RenderingSystem extends IteratingSystem {
         batch.begin();
         super.update(deltaTime);
         batch.end();
-        if (Gdx.input.isKeyPressed(Input.Keys.F)){
-            camera.position.y +=1f;
-            System.out.println("Y: "+camera.position.y);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.V)){
-            camera.position.y -=1f;
-            System.out.println("Y: "+camera.position.y);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.C)){
-            camera.position.x -=1f;
+        if (Gdx.input.isTouched()) {
+            camera.translate(-Gdx.input.getDeltaX(), Gdx.input.getDeltaY());
             System.out.println("X: "+camera.position.x);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.B)){
-            camera.position.x +=1f;
-            System.out.println("X: "+camera.position.x);
+            System.out.println("Y: "+camera.position.y);
         }
         camera.update();
     }
