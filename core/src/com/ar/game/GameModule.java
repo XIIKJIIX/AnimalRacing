@@ -21,7 +21,7 @@ import static com.ar.game.constant.B2Dvars.PPM;
 public class GameModule implements Module {
     private AnimalRacing animalRacing;
 
-    GameModule(AnimalRacing animalRacing) {
+    public GameModule(AnimalRacing animalRacing) {
         this.animalRacing = animalRacing;
     }
 
