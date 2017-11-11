@@ -1,19 +1,18 @@
 package com.ar.game.entity;
 
-import static com.ar.game.constant.B2Dvars.*;
-
 import com.ar.game.component.*;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
+import static com.ar.game.constant.B2Dvars.PPM;
+
 public class Player extends Entity {
-    private World world;
 
     public Player(World world,
                   PlayerComponent player,
-                  TypeComponent type) {
-        this.world = world;
+                  TypeComponent type,
+                  DataComponent data) {
 
         BodyDef bodyDef = new BodyDef();
         FixtureDef fixtureDef = new FixtureDef();
@@ -22,7 +21,7 @@ public class Player extends Entity {
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         Body body = world.createBody(bodyDef);
 
-        shape.setAsBox(20F / PPM, 20F / PPM);
+        shape.setAsBox(data.width, data.height);
         fixtureDef.shape = shape;
         fixtureDef.restitution = 0.5F;
         fixtureDef.filter.groupIndex = type.getGroup();
@@ -30,15 +29,16 @@ public class Player extends Entity {
         shape.dispose();
 
 
-        TransformComponent transformComponent = new TransformComponent(new Vector2(640F / PPM, 520F / PPM));
+        TransformComponent transformComponent = new TransformComponent(new Vector2(30F / PPM, 10F / PPM));
         body.setTransform(transformComponent.position, 0F);
         // Set user data of body to this entity for handling collide
         body.setUserData(this);
 
         super.add(transformComponent);
-        super.add(new PhysicsComponent(body, "Player"));
+        super.add(new PhysicsComponent(body));
         super.add(player);
         super.add(type);
+        super.add(data);
         super.add(new CollisionComponent());
         super.add(new StateComponent());
     }

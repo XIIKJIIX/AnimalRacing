@@ -2,6 +2,7 @@ package com.ar.game.screen;
 
 import com.ar.game.AnimalRacing;
 import com.ar.game.MapBuilder;
+import com.ar.game.component.DataComponent;
 import com.ar.game.component.PlayerComponent;
 import com.ar.game.component.TypeComponent;
 import com.ar.game.entity.Platform;
@@ -48,12 +49,14 @@ public class MainGameScreen extends ScreenAdapter {
         engine.addEntity(new Player(
                 world,
                 new PlayerComponent(LEFT, RIGHT, UP, SHIFT_RIGHT, 300F),
-                new TypeComponent(TypeComponent.PLAYER)
+                new TypeComponent(TypeComponent.PLAYER),
+                new DataComponent(20F / PPM, 20F / PPM, "Player1")
         ));
         engine.addEntity(new Player(
                 world,
                 new PlayerComponent(A, D, W, Q, 300F),
-                new TypeComponent(TypeComponent.PLAYER)
+                new TypeComponent(TypeComponent.PLAYER),
+                new DataComponent(20F / PPM, 20F / PPM, "Player2")
         ));
     }
 

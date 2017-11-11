@@ -4,7 +4,6 @@ import com.ar.game.component.*;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.Gdx;
 import com.google.inject.Inject;
 
 public class CollisionSystem extends IteratingSystem {
@@ -19,14 +18,15 @@ public class CollisionSystem extends IteratingSystem {
         // Get player collision component
         CollisionComponent collision = Mapper.collision.get(entity);
         PhysicsComponent physics = Mapper.physics.get(entity);
+        DataComponent data = Mapper.data.get(entity);
         Entity collidedEntity = collision.getCollidedEntity();
         if (collidedEntity != null) {
-            PhysicsComponent colPhysics = Mapper.physics.get(collidedEntity);
+            DataComponent colData = Mapper.data.get(collidedEntity);
             TypeComponent type = Mapper.type.get(collidedEntity);
             if (type != null) {
                 switch (type.getGroup()) {
                     case TypeComponent.PLAYER:
-                        System.out.println(physics.name + " collide with " + colPhysics.name);
+                        System.out.println(data + " collide with " + colData.name);
                         break;
                     case TypeComponent.SCENERY:
                         System.out.println("Player collide with Scene");

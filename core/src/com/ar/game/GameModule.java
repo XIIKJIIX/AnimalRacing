@@ -3,7 +3,9 @@ package com.ar.game;
 import com.ar.game.handler.CollisionDetector;
 import com.ar.game.system.*;
 import com.badlogic.ashley.core.Engine;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2D;
@@ -66,7 +68,17 @@ public class GameModule implements Module {
                 PhysicsDebugSystem.class,
                 PhysicsSystem.class,
                 PhysicsSynchronizationSystem.class,
-                CameraSystem.class
+//                CameraSystem.class,
+                HealthSystem.class
         ));
+    }
+
+    @Provides
+    @Singleton
+    public AssetManager asset() {
+        AssetManager manager = new AssetManager();
+        manager.load("blank.png", Texture.class);
+        manager.finishLoading();
+        return manager;
     }
 }
