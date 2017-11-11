@@ -71,10 +71,11 @@ public class AnimalRacing extends ApplicationAdapter {
 
 	@Override
 	public void render () {
+		OrthographicCamera camera = injector.getInstance(OrthographicCamera.class);
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		engine.update(Gdx.graphics.getDeltaTime());
-		tmr.setView(injector.getInstance(OrthographicCamera.class));
+		tmr.setView(camera);
 		tmr.render();
 	}
 	

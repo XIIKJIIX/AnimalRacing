@@ -3,7 +3,6 @@ package com.ar.game;
 import com.ar.game.handler.CollisionDetector;
 import com.ar.game.handler.KeyboardController;
 import com.ar.game.system.*;
-import static com.ar.game.constant.B2Dvars.*;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,6 +15,8 @@ import com.google.inject.Provides;
 import com.google.inject.Singleton;
 
 import java.util.Arrays;
+
+import static com.ar.game.constant.B2Dvars.PPM;
 
 public class GameModule implements Module {
     private AnimalRacing animalRacing;
@@ -66,7 +67,8 @@ public class GameModule implements Module {
                 PlayerControlSystem.class,
                 PhysicsDebugSystem.class,
                 PhysicsSystem.class,
-                PhysicsSynchronizationSystem.class
+                PhysicsSynchronizationSystem.class,
+                CameraSystem.class
         ));
     }
 }
