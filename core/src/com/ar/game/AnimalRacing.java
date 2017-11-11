@@ -5,6 +5,8 @@ import com.ar.game.screen.MainMenuScreen;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 public class AnimalRacing extends Game {
     public static String TITLE = "Animal Racing";
@@ -15,11 +17,13 @@ public class AnimalRacing extends Game {
     public SpriteBatch batch;
     public Engine engine = new Engine();
     public static KeyboardController controller = new KeyboardController();
+    public Injector injector;
 
 	@Override
 	public void create () {
 	    batch = new SpriteBatch();
-        this.setScreen(new MainMenuScreen(this));
+        injector = Guice.createInjector(new GameModule(this));
+        this.setScreen(injector.getInstance(MainMenuScreen.class));
 	}
 
 	@Override

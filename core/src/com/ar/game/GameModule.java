@@ -31,6 +31,7 @@ public class GameModule implements Module {
         binder.requireAtInjectOnConstructors();
         binder.requireExactBindingAnnotations();
         binder.bind(SpriteBatch.class).toInstance(animalRacing.batch);
+        binder.bind(AnimalRacing.class).toInstance(animalRacing);
     }
 
     @Provides
@@ -78,6 +79,10 @@ public class GameModule implements Module {
     public AssetManager asset() {
         AssetManager manager = new AssetManager();
         manager.load("blank.png", Texture.class);
+        manager.load("Play_active.jpg", Texture.class);
+        manager.load("Play_inactive.jpg", Texture.class);
+        manager.load("Exit_active.jpg", Texture.class);
+        manager.load("Exit_inactive.jpg", Texture.class);
         manager.finishLoading();
         return manager;
     }

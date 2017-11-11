@@ -1,26 +1,26 @@
 package com.ar.game.screen;
 
 import com.ar.game.AnimalRacing;
-import com.ar.game.GameModule;
 import com.ar.game.system.Systems;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.google.inject.Inject;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class MainMenuScreen extends ScreenAdapter {
 
-    AnimalRacing game;
-
-    Texture exitButtonActive;
-    Texture exitButtonInactive;
-    Texture playButtonActive;
-    Texture playButtonInactive;
+    private Texture exitButtonActive;
+    private Texture exitButtonInactive;
+    private Texture playButtonActive;
+    private Texture playButtonInactive;
+    private SpriteBatch batch;
+    private AnimalRacing game;
     private static final int EXIT_BUTTON_WIDTH = 300;
     private static final int EXIT_BUTTON_HEIGHT = 100;
     private static final int PLAY_BUTTON_WIDTH = 300;
@@ -31,14 +31,14 @@ public class MainMenuScreen extends ScreenAdapter {
     Object[] options = {"Yes", "No"};
 
 
-    public Injector injector;
-
-    public MainMenuScreen (AnimalRacing game){
+    @Inject
+    public MainMenuScreen (AssetManager manager, SpriteBatch batch, AnimalRacing game){
+        this.batch = batch;
         this.game = game;
-        playButtonActive = new Texture("Play_active.jpg");
-        playButtonInactive = new Texture("Play_inactive.jpg");
-        exitButtonActive = new Texture("Exit_active.jpg");
-        exitButtonInactive = new Texture("Exit_inactive.jpg");
+        playButtonActive = manager.get("Play_active.jpg", Texture.class);
+        playButtonInactive = manager.get("Play_inactive.jpg", Texture.class);
+        exitButtonActive = manager.get("Exit_active.jpg", Texture.class);
+        exitButtonInactive = manager.get("Exit_inactive.jpg", Texture.class);
     }
 
     @Override
@@ -46,13 +46,13 @@ public class MainMenuScreen extends ScreenAdapter {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        game.batch.begin();
+        batch.begin();
 
         int x = AnimalRacing.V_WIDTH - EXIT_BUTTON_WIDTH/2;
         if (Gdx.input.getX() < x + EXIT_BUTTON_WIDTH && Gdx.input.getX() > x &&
                 AnimalRacing.V_HEIGHT*2 - Gdx.input.getY() < EXIT_BUTTON_Y + EXIT_BUTTON_HEIGHT &&
                 AnimalRacing.V_HEIGHT*2 - Gdx.input.getY()> EXIT_BUTTON_Y) {
-            game.batch.draw(exitButtonActive, x, EXIT_BUTTON_Y, EXIT_BUTTON_WIDTH, EXIT_BUTTON_HEIGHT);
+            batch.draw(exitButtonActive, x, EXIT_BUTTON_Y, EXIT_BUTTON_WIDTH, EXIT_BUTTON_HEIGHT);
 
             if (Gdx.input.isTouched()){
                 UIManager.put("OptionPane.minimumSize",new Dimension(AnimalRacing.V_WIDTH,AnimalRacing.V_HEIGHT/2));
@@ -70,29 +70,28 @@ public class MainMenuScreen extends ScreenAdapter {
         }
 
         else {
-            game.batch.draw(exitButtonInactive, x, EXIT_BUTTON_Y, EXIT_BUTTON_WIDTH, EXIT_BUTTON_HEIGHT);
+            batch.draw(exitButtonInactive, x, EXIT_BUTTON_Y, EXIT_BUTTON_WIDTH, EXIT_BUTTON_HEIGHT);
         }
 
         if (Gdx.input.getX() < x + PLAY_BUTTON_WIDTH && Gdx.input.getX() > x &&
                 AnimalRacing.V_HEIGHT*2 - Gdx.input.getY() < PLAY_BUTTON_Y + PLAY_BUTTON_HEIGHT &&
                 AnimalRacing.V_HEIGHT*2 - Gdx.input.getY() > PLAY_BUTTON_Y){
-            game.batch.draw(playButtonActive, x, PLAY_BUTTON_Y, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
+            batch.draw(playButtonActive, x, PLAY_BUTTON_Y, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
 
             if (Gdx.input.isTouched()){
                 this.dispose();
-                injector = Guice.createInjector(new GameModule(game));
-                injector.getInstance(Systems.class).list.stream()
-                        .map(systemClass -> injector.getInstance(systemClass))
+                game.injector.getInstance(Systems.class).list.stream()
+                        .map(systemClass -> game.injector.getInstance(systemClass))
                         .forEach(entitySystem -> game.engine.addSystem(entitySystem));
-                game.setScreen(injector.getInstance(MainGameScreen.class));
+                game.setScreen(game.injector.getInstance(MainGameScreen.class));
             }
         }
 
         else {
-            game.batch.draw(playButtonInactive, x, PLAY_BUTTON_Y, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
+            batch.draw(playButtonInactive, x, PLAY_BUTTON_Y, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
         }
 
-        game.batch.end();
+        batch.end();
     }
 
     @Override
