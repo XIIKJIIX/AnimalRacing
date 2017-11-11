@@ -8,6 +8,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -32,7 +33,15 @@ public class HealthSystem extends IteratingSystem {
         TransformComponent transform = Mapper.transform.get(entity);
         PlayerComponent player = Mapper.player.get(entity);
         DataComponent data = Mapper.data.get(entity);
-        batch.draw(healthBar, transform.position.x - data.width, transform.position.y + 0.35f, data.width*2*((player.health/player.maxHealth)), 0.05f);
+        float healthPercent = player.health / player.maxHealth;
+        if (healthPercent > 0.6) {
+            batch.setColor(Color.GREEN);
+        } else if (healthPercent > 0.25) {
+            batch.setColor(Color.ORANGE);
+        } else {
+            batch.setColor(Color.RED);
+        }
+        batch.draw(healthBar, transform.position.x - data.width, transform.position.y + 0.35f, data.width*2*((healthPercent)), 0.05f);
 
     }
 
