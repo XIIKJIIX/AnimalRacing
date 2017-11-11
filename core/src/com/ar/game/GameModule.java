@@ -1,7 +1,6 @@
 package com.ar.game;
 
 import com.ar.game.handler.CollisionDetector;
-import com.ar.game.handler.KeyboardController;
 import com.ar.game.system.*;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -30,7 +29,6 @@ public class GameModule implements Module {
         binder.requireAtInjectOnConstructors();
         binder.requireExactBindingAnnotations();
         binder.bind(SpriteBatch.class).toInstance(animalRacing.batch);
-        binder.bind(KeyboardController.class).toInstance(animalRacing.controller);
     }
 
     @Provides

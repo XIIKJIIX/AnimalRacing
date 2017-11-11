@@ -1,5 +1,6 @@
 package com.ar.game.screen;
 
+import com.ar.game.AnimalRacing;
 import com.ar.game.MapBuilder;
 import com.ar.game.component.PlayerComponent;
 import com.ar.game.component.TypeComponent;
@@ -29,19 +30,17 @@ public class MainGameScreen extends ScreenAdapter {
     private OrthographicCamera camera;
     private Engine engine;
     private SpriteBatch batch;
-    private KeyboardController controller;
+    private KeyboardController controller = AnimalRacing.controller;
 
     @Inject
     public MainGameScreen(World world,
                           OrthographicCamera camera,
                           Engine engine,
-                          SpriteBatch batch,
-                          KeyboardController controller) {
+                          SpriteBatch batch) {
         this.world = world;
         this.camera = camera;
         this.engine = engine;
         this.batch = batch;
-        this.controller = controller;
     }
 
     private void createEntities() {

@@ -1,27 +1,23 @@
 package com.ar.game.system;
 
+import com.ar.game.AnimalRacing;
 import com.ar.game.component.Mapper;
 import com.ar.game.component.PhysicsComponent;
 import com.ar.game.component.PlayerComponent;
 import com.ar.game.component.StateComponent;
 import com.ar.game.handler.KeyboardController;
-import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.google.inject.Inject;
 
 public class PlayerControlSystem extends IteratingSystem {
-    private KeyboardController controller;
-
+    KeyboardController controller = AnimalRacing.controller;
     @Inject
-    public PlayerControlSystem(KeyboardController controller) {
+    public PlayerControlSystem() {
         super(Family.all(PlayerComponent.class).get());
-        this.controller = controller;
     }
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
