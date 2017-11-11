@@ -22,11 +22,14 @@ public class AnimalRacing extends Game {
 	@Override
 	public void create () {
 	    batch = new SpriteBatch();
-	    injector = Guice.createInjector(new GameModule(this));
-        injector.getInstance(Systems.class).list.stream()
-                .map(systemClass -> injector.getInstance(systemClass))
-                .forEach(entitySystem -> engine.addSystem(entitySystem));
-        this.setScreen(injector.getInstance(MainGameScreen.class));
+	    // Lines below need to run before MainScreen Starts
+	    if (true) { // If main game is going to begin| Change a condition to what ever u want
+            injector = Guice.createInjector(new GameModule(this));
+            injector.getInstance(Systems.class).list.stream()
+                    .map(systemClass -> injector.getInstance(systemClass))
+                    .forEach(entitySystem -> engine.addSystem(entitySystem));
+            this.setScreen(injector.getInstance(MainGameScreen.class));
+        }
 	}
 
 	@Override
