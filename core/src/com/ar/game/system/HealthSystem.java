@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.physics.box2d.World;
 import com.google.inject.Inject;
 
 public class HealthSystem extends IteratingSystem {
@@ -19,6 +20,7 @@ public class HealthSystem extends IteratingSystem {
     private OrthographicCamera camera;
     private AssetManager manager;
     private Texture healthBar;
+    private World world;
 
     @Inject
     public HealthSystem(OrthographicCamera camera, SpriteBatch batch, AssetManager manager) {
@@ -26,6 +28,7 @@ public class HealthSystem extends IteratingSystem {
         this.batch = batch;
         this.camera = camera;
         this.manager = manager;
+        this.world = world;
         healthBar = manager.get("blank.png", Texture.class);
     }
     @Override
@@ -47,6 +50,7 @@ public class HealthSystem extends IteratingSystem {
 
     @Override
     public void update(float deltaTime) {
+        batch.setProjectionMatrix(camera.combined);
         batch.begin();
         super.update(deltaTime);
         batch.end();

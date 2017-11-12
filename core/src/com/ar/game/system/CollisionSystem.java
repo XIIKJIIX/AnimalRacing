@@ -26,7 +26,7 @@ public class CollisionSystem extends IteratingSystem {
             if (type != null) {
                 switch (type.getGroup()) {
                     case TypeComponent.PLAYER:
-                        System.out.println(data + " collide with " + colData.name);
+                        System.out.println(data.name + " collide with " + colData.name);
                         break;
                     case TypeComponent.SCENERY:
                         System.out.println("Player collide with Scene");
