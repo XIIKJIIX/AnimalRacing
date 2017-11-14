@@ -3,7 +3,7 @@ package com.ar.game.component;
 import com.badlogic.ashley.core.Component;
 
 public class StateComponent implements Component {
-    public static enum State {NORMAL, JUMPING, FALLING, MOVIING, HIT};
+    public static enum State {NORMAL, JUMPING, FALLING, MOVING, HIT};
     public State state = State.NORMAL;
     public State prevState = State.NORMAL;
     public float time = 0.0f;

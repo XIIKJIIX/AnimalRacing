@@ -38,7 +38,7 @@ public class PlayerControlSystem extends IteratingSystem {
             if (state.get() == FALLING) state.set(NORMAL);
 
             // set state moving if not falling and moving on x axis
-            if (xVelocity != 0) state.set(MOVIING);
+            if (xVelocity != 0) state.set(MOVING);
         }
 
         if (controller.KEY_MAP.get(player.leftKey))
@@ -59,7 +59,7 @@ public class PlayerControlSystem extends IteratingSystem {
                     yVelocity
             );
 
-        if (controller.KEY_MAP.get(player.upKey) && (state.get() == NORMAL || state.get() == MOVIING)) {
+        if (controller.KEY_MAP.get(player.upKey) && (state.get() == NORMAL || state.get() == MOVING)) {
             physics.body.applyLinearImpulse(0, 4F, worldCenter.x, worldCenter.y, true);
             state.set(JUMPING);
         }
