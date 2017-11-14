@@ -33,13 +33,10 @@ public class PlayerControlSystem extends IteratingSystem {
         if (yVelocity > 0) state.set(FALLING);
 
         // If body stationary on y axis
-        if (yVelocity == 0) {
-            // change to normal state if previous state was falling (no mid air jump)
-            if (state.get() == FALLING) state.set(NORMAL);
-
-            // set state moving if not falling and moving on x axis
-            if (xVelocity != 0) state.set(MOVING);
-        }
+        if (yVelocity > 0 || (yVelocity < 0) && state.prevState == JUMPING) state.set(JUMPING);
+        else if (yVelocity < 0) state.set(FALLING);
+        else if (xVelocity != 0) state.set(MOVING);
+        else state.set(NORMAL);
 
         if (controller.KEY_MAP.get(player.leftKey))
             physics.body.setLinearVelocity(
@@ -63,5 +60,8 @@ public class PlayerControlSystem extends IteratingSystem {
             physics.body.applyLinearImpulse(0, 4F, worldCenter.x, worldCenter.y, true);
             state.set(JUMPING);
         }
+
+        state.stateTimer = state.state == state.prevState ? state.stateTimer + deltaTime: 0;
+        state.prevState = state.state;
     }
 }

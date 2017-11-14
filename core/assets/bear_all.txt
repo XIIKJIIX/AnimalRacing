@@ -1,0 +1,19 @@
+bear_all.png
+size: 1218, 273
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bear_jump
+  rotate: false
+  xy: 0, 0
+  size: 576, 254
+  orig: 576, 254
+  offset: 0, 0
+  index: -1
+bear_run
+  rotate: false
+  xy: 576, 0
+  size: 642, 273
+  orig: 642, 273
+  offset: 0, 0
+  index: -1
