@@ -71,7 +71,10 @@ public class GameModule implements Module {
                 PhysicsSynchronizationSystem.class,
                 CameraSystem.class,
                 HealthSystem.class,
-                DyingSystem.class
+                DyingSystem.class,
+//                CameraSystem.class,
+                HealthSystem.class,
+                AnimateSystem.class
         ));
     }
 

@@ -5,6 +5,7 @@ import com.ar.game.component.Mapper;
 import com.ar.game.component.PhysicsComponent;
 import com.ar.game.component.PlayerComponent;
 import com.ar.game.component.StateComponent;
+import static com.ar.game.component.StateComponent.State.*;
 import com.ar.game.handler.KeyboardController;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
@@ -29,16 +30,13 @@ public class PlayerControlSystem extends IteratingSystem {
         float xVelocity = physics.body.getLinearVelocity().x;
         Vector2 worldCenter = physics.body.getWorldCenter();
         // If body going down set to falling state
-        if (yVelocity > 0) state.set(StateComponent.STATE_FALLING);
+        if (yVelocity > 0) state.set(FALLING);
 
         // If body stationary on y axis
-        if (yVelocity == 0) {
-            // change to normal state if previous state was falling (no mid air jump)
-            if (state.get() == StateComponent.STATE_FALLING) state.set(StateComponent.STATE_NORMAL);
-
-            // set state moving if not falling and moving on x axis
-            if (xVelocity != 0) state.set(StateComponent.STATE_MOVING);
-        }
+        if (yVelocity > 0 || (yVelocity < 0) && state.prevState == JUMPING) state.set(JUMPING);
+        else if (yVelocity < 0) state.set(FALLING);
+        else if (xVelocity != 0) state.set(MOVING);
+        else state.set(NORMAL);
 
         if (controller.KEY_MAP.get(player.leftKey))
             physics.body.setLinearVelocity(
@@ -58,9 +56,12 @@ public class PlayerControlSystem extends IteratingSystem {
                     yVelocity
             );
 
-        if (controller.KEY_MAP.get(player.upKey) && (state.get() == StateComponent.STATE_NORMAL || state.get() == StateComponent.STATE_MOVING)) {
+        if (controller.KEY_MAP.get(player.upKey) && (state.get() == NORMAL || state.get() == MOVING)) {
             physics.body.applyLinearImpulse(0, 4F, worldCenter.x, worldCenter.y, true);
-            state.set(StateComponent.STATE_JUMPING);
+            state.set(JUMPING);
         }
+
+        state.stateTimer = state.state == state.prevState ? state.stateTimer + deltaTime: 0;
+        state.prevState = state.state;
     }
 }
