@@ -28,7 +28,7 @@ import static com.ar.game.constant.B2Dvars.PPM;
 import static com.badlogic.gdx.Input.Keys.*;
 import static com.ar.game.component.StateComponent.State.*;
 
-public class MainGameScreen extends ScreenAdapter {
+public class PlayScreen extends ScreenAdapter {
 
     private TiledMap tiledMap;
     private OrthogonalTiledMapRenderer tmr;
@@ -39,10 +39,10 @@ public class MainGameScreen extends ScreenAdapter {
     private KeyboardController controller = AnimalRacing.controller;
 
     @Inject
-    public MainGameScreen(World world,
-                          OrthographicCamera camera,
-                          Engine engine,
-                          SpriteBatch batch) {
+    public PlayScreen(World world,
+                      OrthographicCamera camera,
+                      Engine engine,
+                      SpriteBatch batch) {
         this.world = world;
         this.camera = camera;
         this.engine = engine;

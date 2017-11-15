@@ -88,7 +88,7 @@ public class MainMenuScreen extends ScreenAdapter {
                 game.injector.getInstance(Systems.class).list.stream()
                         .map(systemClass -> game.injector.getInstance(systemClass))
                         .forEach(entitySystem -> game.engine.addSystem(entitySystem));
-                game.setScreen(game.injector.getInstance(MainGameScreen.class));
+                game.setScreen(game.injector.getInstance(PlayScreen.class));
                 return true;
             }
         });
@@ -105,7 +105,7 @@ public class MainMenuScreen extends ScreenAdapter {
                 game.injector.getInstance(Systems.class).list.stream()
                         .map(systemClass -> game.injector.getInstance(systemClass))
                         .forEach(entitySystem -> game.engine.addSystem(entitySystem));
-                game.setScreen(game.injector.getInstance(MainGameScreen.class));
+                game.setScreen(game.injector.getInstance(PlayScreen.class));
                 return true;
             }
         });
