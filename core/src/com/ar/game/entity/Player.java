@@ -29,7 +29,7 @@ public class Player extends Entity {
         shape.dispose();
 
 
-        TransformComponent transformComponent = new TransformComponent(new Vector2(30F / PPM, 10F / PPM));
+        TransformComponent transformComponent = new TransformComponent(new Vector2(80F / PPM, 100F / PPM));
         body.setTransform(transformComponent.position, 0F);
         // Set user data of body to this entity for handling collide
         body.setUserData(this);
