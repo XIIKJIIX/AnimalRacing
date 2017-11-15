@@ -1,0 +1,82 @@
+cat_run.png
+size: 1800, 1968
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+lzrun0
+  rotate: false
+  xy: 0, 0
+  size: 450, 656
+  orig: 450, 656
+  offset: 0, 0
+  index: -1
+lzrun1
+  rotate: false
+  xy: 450, 0
+  size: 450, 656
+  orig: 450, 656
+  offset: 0, 0
+  index: -1
+lzrun2
+  rotate: false
+  xy: 900, 0
+  size: 450, 656
+  orig: 450, 656
+  offset: 0, 0
+  index: -1
+lzrun3
+  rotate: false
+  xy: 1350, 0
+  size: 450, 656
+  orig: 450, 656
+  offset: 0, 0
+  index: -1
+lzrun4
+  rotate: false
+  xy: 0, 656
+  size: 450, 656
+  orig: 450, 656
+  offset: 0, 0
+  index: -1
+lzrun5
+  rotate: false
+  xy: 450, 656
+  size: 450, 656
+  orig: 450, 656
+  offset: 0, 0
+  index: -1
+lzrun6
+  rotate: false
+  xy: 900, 656
+  size: 450, 656
+  orig: 450, 656
+  offset: 0, 0
+  index: -1
+lzrun7
+  rotate: false
+  xy: 1350, 656
+  size: 450, 656
+  orig: 450, 656
+  offset: 0, 0
+  index: -1
+lzrun8
+  rotate: false
+  xy: 0, 1312
+  size: 450, 656
+  orig: 450, 656
+  offset: 0, 0
+  index: -1
+lzrun9
+  rotate: false
+  xy: 450, 1312
+  size: 450, 656
+  orig: 450, 656
+  offset: 0, 0
+  index: -1
+lzrun10
+  rotate: false
+  xy: 900, 1312
+  size: 450, 656
+  orig: 450, 656
+  offset: 0, 0
+  index: -1

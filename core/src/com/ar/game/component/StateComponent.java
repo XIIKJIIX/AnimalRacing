@@ -12,7 +12,6 @@ public class StateComponent implements Component {
 
     public void set(State newState) {
         state = newState;
-        stateTimer = 0.0f;
     }
 
     public State get() {
