@@ -17,7 +17,7 @@ public class AnimalRacing extends Game {
     public SpriteBatch batch;
     public Engine engine = new Engine();
     public static KeyboardController controller = new KeyboardController();
-    public Injector injector;
+    public static Injector injector;
 
 	@Override
 	public void create () {

@@ -12,6 +12,10 @@ public class PlayerComponent implements Component {
     public float maxHealth;
 
     public PlayerComponent(int leftKey, int rightKey, int upKey, int castKey, float maxHealth) {
+        // For Mock up only
+        orbs.addFirst(Orb.QUARZ);
+        orbs.addFirst(Orb.QUARZ);
+        orbs.addFirst(Orb.QUARZ);
         this.leftKey = leftKey;
         this.rightKey = rightKey;
         this.upKey = upKey;

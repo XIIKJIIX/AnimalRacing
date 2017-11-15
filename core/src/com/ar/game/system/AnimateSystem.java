@@ -22,7 +22,7 @@ public class AnimateSystem extends IteratingSystem {
 
     @Inject
     public AnimateSystem(OrthographicCamera camera, World world, SpriteBatch batch) {
-        super(Family.all(AnimationComponent.class, StateComponent.class, PlayerComponent.class).get());
+        super(Family.all(AnimationComponent.class, StateComponent.class, TransformComponent.class).get());
         this.camera = camera;
         this.world = world;
         this.batch = batch;

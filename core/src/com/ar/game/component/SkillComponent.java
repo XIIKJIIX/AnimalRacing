@@ -10,17 +10,18 @@ public class SkillComponent implements Component {
     public static enum ON_HIT {BOMB, BLOCK, THROUGH, GONE};
 
     // Map with Type and amount in percent of it's value to heal or damage
-    public HashMap<Type, Float> type;
+    public HashMap<Type, Float> type = new HashMap<>();
     public ShotType shotType;
     public ON_HIT onHit;
+    public float cooldown;
 
-    public SkillComponent(ShotType shotType, ON_HIT onHit) {
+    public SkillComponent(ShotType shotType, ON_HIT onHit, float cooldown) {
         this.shotType = shotType;
         this.onHit = onHit;
+        this.cooldown = cooldown;
     }
 
-    public SkillComponent addSkill(Type type, float amount) {
+    public void addSkill(Type type, float amount) {
         this.type.put(type, amount);
-        return this;
     }
 }
