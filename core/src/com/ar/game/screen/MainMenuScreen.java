@@ -2,10 +2,12 @@ package com.ar.game.screen;
 
 import com.ar.game.AnimalRacing;
 import com.ar.game.system.Systems;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -15,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.google.inject.Inject;
 import javax.swing.*;
@@ -26,10 +29,23 @@ public class MainMenuScreen extends ScreenAdapter {
     private Texture exitButtonInactiveImage;
     private Texture playButtonActiveImage;
     private Texture playButtonInactiveImage;
+    private Texture instructionButtonActiveImage;
+    private Texture instructionButtonInactiveImage;
+    private Texture parallax1;
+    private Texture parallax2;
+    private Texture parallax3;
+    private Texture parallax4;
+    private Texture parallax5;
+    private Texture parallax6;
     private ImageButton playButtonActive;
     private ImageButton playButtonInactive;
+    private ImageButton instructionButtonActive;
+    private ImageButton instructionButtonInactive;
     private ImageButton exitButtonActive;
     private ImageButton exitButtonInactive;
+
+    private Game game2;
+    private OrthographicCamera camera;
 
     private SpriteBatch batch;
     private AnimalRacing game;
@@ -42,39 +58,109 @@ public class MainMenuScreen extends ScreenAdapter {
     public MainMenuScreen (AssetManager manager, SpriteBatch batch, AnimalRacing game){
         this.batch = batch;
         this.game = game;
-        playButtonActiveImage = manager.get("Play_active.jpg", Texture.class);
-        playButtonInactiveImage = manager.get("Play_inactive.jpg", Texture.class);
-        exitButtonActiveImage = manager.get("Exit_active.jpg", Texture.class);
-        exitButtonInactiveImage = manager.get("Exit_inactive.jpg", Texture.class);
+        playButtonActiveImage = manager.get("Play_active.png", Texture.class);
+        playButtonInactiveImage = manager.get("Play_inactive.png", Texture.class);
+        exitButtonActiveImage = manager.get("Exit_active.png", Texture.class);
+        exitButtonInactiveImage = manager.get("Exit_inactive.png", Texture.class);
+        instructionButtonActiveImage = manager.get("Instruction_active.png", Texture.class);
+        instructionButtonInactiveImage = manager.get("Instruction_inactive.png", Texture.class);
+        parallax1 = manager.get("parallax1.png", Texture.class);
+        parallax2 = manager.get("parallax2.png", Texture.class);
+        parallax3 = manager.get("parallax3.png", Texture.class);
+        parallax4 = manager.get("parallax4.png", Texture.class);
+        parallax5 = manager.get("parallax5.png", Texture.class);
+        parallax6 = manager.get("parallax6.png", Texture.class);
+
     }
 
+    public void Composition(Game aGame) {
+        game2 = aGame;
+        stage = new Stage(new ScreenViewport());
+        camera = (OrthographicCamera) stage.getViewport().getCamera();
 
-
-    @Override
-    public void show(){
+        Array<Texture> textures = new Array<Texture>();
+        textures.add(parallax1);
+        textures.get(textures.size-1).setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
+        textures.add(parallax2);
+        textures.get(textures.size-1).setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
+        textures.add(parallax3);
+        textures.get(textures.size-1).setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
+        textures.add(parallax4);
+        textures.get(textures.size-1).setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
+        textures.add(parallax5);
+        textures.get(textures.size-1).setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
+        textures.add(parallax6);
+        textures.get(textures.size-1).setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
+        ParallaxBackground parallaxBackground = new ParallaxBackground(textures);
+        parallaxBackground.setSize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        parallaxBackground.setSpeed(1);
+        stage.addActor(parallaxBackground);
 
         playButtonInactive = new ImageButton(new TextureRegionDrawable(new TextureRegion(playButtonInactiveImage)));
-        playButtonInactive.setHeight(playButtonInactive.getHeight()/2);
-        playButtonInactive.setWidth(playButtonInactive.getWidth()/2);
-        playButtonInactive.setPosition(Gdx.graphics.getWidth()/2 - playButtonInactive.getWidth()/2, Gdx.graphics.getHeight()/2);
+        playButtonInactive.setHeight(Gdx.graphics.getHeight()/5);
+        playButtonInactive.setWidth(Gdx.graphics.getHeight()/5);
+        playButtonInactive.setPosition(Gdx.graphics.getWidth()/2 - playButtonInactive.getWidth()/2 - Gdx.graphics.getWidth()/4, Gdx.graphics.getHeight()/8);
 
         playButtonActive = new ImageButton(new TextureRegionDrawable(new TextureRegion(playButtonActiveImage)));
-        playButtonActive.setHeight(playButtonActive.getHeight()/2);
-        playButtonActive.setWidth(playButtonActive.getWidth()/2);
-        playButtonActive.setPosition(Gdx.graphics.getWidth()/2 - playButtonActive.getWidth()/2, Gdx.graphics.getHeight()/2);
+        playButtonActive.setHeight(Gdx.graphics.getHeight()/5);
+        playButtonActive.setWidth(Gdx.graphics.getHeight()/5);
+        playButtonActive.setPosition(Gdx.graphics.getWidth()/2 - playButtonInactive.getWidth()/2 - Gdx.graphics.getWidth()/4, Gdx.graphics.getHeight()/8);
+
+        instructionButtonInactive = new ImageButton(new TextureRegionDrawable(new TextureRegion(instructionButtonInactiveImage)));
+        instructionButtonInactive.setHeight(Gdx.graphics.getHeight()/5);
+        instructionButtonInactive.setWidth(Gdx.graphics.getHeight()/5);
+        instructionButtonInactive.setPosition(Gdx.graphics.getWidth()/2 - playButtonInactive.getWidth()/2, Gdx.graphics.getHeight()/8);
+
+        instructionButtonActive = new ImageButton(new TextureRegionDrawable(new TextureRegion(instructionButtonActiveImage)));
+        instructionButtonActive.setHeight(Gdx.graphics.getHeight()/5);
+        instructionButtonActive.setWidth(Gdx.graphics.getHeight()/5);
+        instructionButtonActive.setPosition(Gdx.graphics.getWidth()/2 - playButtonInactive.getWidth()/2, Gdx.graphics.getHeight()/8);
 
         exitButtonInactive = new ImageButton(new TextureRegionDrawable(new TextureRegion(exitButtonInactiveImage)));
-        exitButtonInactive.setHeight(exitButtonInactive.getHeight()/2);
-        exitButtonInactive.setWidth(exitButtonInactive.getWidth()/2);
-        exitButtonInactive.setPosition(Gdx.graphics.getWidth()/2 - exitButtonInactive.getWidth()/2, Gdx.graphics.getHeight()/4);
+        exitButtonInactive.setHeight(Gdx.graphics.getHeight()/5);
+        exitButtonInactive.setWidth(Gdx.graphics.getHeight()/5);
+        exitButtonInactive.setPosition(Gdx.graphics.getWidth()/2 - playButtonInactive.getWidth()/2 + Gdx.graphics.getWidth()/4, Gdx.graphics.getHeight()/8);
 
         exitButtonActive = new ImageButton(new TextureRegionDrawable(new TextureRegion(exitButtonActiveImage)));
-        exitButtonActive.setHeight(exitButtonActive.getHeight()/2);
-        exitButtonActive.setWidth(exitButtonActive.getWidth()/2);
-        exitButtonActive.setPosition(Gdx.graphics.getWidth()/2 - exitButtonActive.getWidth()/2, Gdx.graphics.getHeight()/4);
+        exitButtonActive.setHeight(Gdx.graphics.getHeight()/5);
+        exitButtonActive.setWidth(Gdx.graphics.getHeight()/5);
+        exitButtonActive.setPosition(Gdx.graphics.getWidth()/2 - playButtonInactive.getWidth()/2 + Gdx.graphics.getWidth()/4, Gdx.graphics.getHeight()/8);
 
-        stage = new Stage(new ScreenViewport());
-        Gdx.input.setInputProcessor(stage);
+        instructionButtonInactive.addListener(new ClickListener() {
+            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor){
+                stage.addActor(instructionButtonActive);
+            }
+            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor){
+                instructionButtonActive.remove();
+            }
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                game.dispose();
+                game.injector.getInstance(Systems.class).list.stream()
+                        .map(systemClass -> game.injector.getInstance(systemClass))
+                        .forEach(entitySystem -> game.engine.addSystem(entitySystem));
+                game.setScreen(game.injector.getInstance(MainGameScreen.class));
+                return true;
+            }
+        });
+
+        instructionButtonActive.addListener(new ClickListener() {
+            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor){
+                instructionButtonActive.remove();
+            }
+            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor){
+                stage.addActor(instructionButtonInactive);
+            }
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                game.dispose();
+                game.injector.getInstance(Systems.class).list.stream()
+                        .map(systemClass -> game.injector.getInstance(systemClass))
+                        .forEach(entitySystem -> game.engine.addSystem(entitySystem));
+                game.setScreen(game.injector.getInstance(MainGameScreen.class));
+                return true;
+            }
+        });
+
+        stage.addActor(instructionButtonInactive);
 
         playButtonInactive.addListener(new ClickListener() {
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor){
@@ -88,7 +174,7 @@ public class MainMenuScreen extends ScreenAdapter {
                 game.injector.getInstance(Systems.class).list.stream()
                         .map(systemClass -> game.injector.getInstance(systemClass))
                         .forEach(entitySystem -> game.engine.addSystem(entitySystem));
-                game.setScreen(game.injector.getInstance(PlayScreen.class));
+                game.setScreen(game.injector.getInstance(MainGameScreen.class));
                 return true;
             }
         });
@@ -105,10 +191,12 @@ public class MainMenuScreen extends ScreenAdapter {
                 game.injector.getInstance(Systems.class).list.stream()
                         .map(systemClass -> game.injector.getInstance(systemClass))
                         .forEach(entitySystem -> game.engine.addSystem(entitySystem));
-                game.setScreen(game.injector.getInstance(PlayScreen.class));
+                game.setScreen(game.injector.getInstance(MainGameScreen.class));
                 return true;
             }
         });
+
+        stage.addActor(playButtonInactive);
 
         exitButtonInactive.addListener(new ClickListener() {
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor){
@@ -156,8 +244,15 @@ public class MainMenuScreen extends ScreenAdapter {
             }
         });
 
-        stage.addActor(playButtonInactive);
         stage.addActor(exitButtonInactive);
+
+    }
+
+    @Override
+    public void show(){
+        stage = new Stage(new ScreenViewport());
+        Composition(game);
+        Gdx.input.setInputProcessor(stage);
 
     }
 
@@ -175,4 +270,5 @@ public class MainMenuScreen extends ScreenAdapter {
     public void dispose() {
         stage.dispose();
     }
+
 }
