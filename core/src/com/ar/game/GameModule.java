@@ -83,10 +83,19 @@ public class GameModule implements Module {
     public AssetManager asset() {
         AssetManager manager = new AssetManager();
         manager.load("blank.png", Texture.class);
-        manager.load("Play_active.jpg", Texture.class);
-        manager.load("Play_inactive.jpg", Texture.class);
-        manager.load("Exit_active.jpg", Texture.class);
-        manager.load("Exit_inactive.jpg", Texture.class);
+        manager.load("blank.png", Texture.class);
+        manager.load("Play_active.png", Texture.class);
+        manager.load("Play_inactive.png", Texture.class);
+        manager.load("Instruction_active.png", Texture.class);
+        manager.load("Instruction_inactive.png", Texture.class);
+        manager.load("Exit_active.png", Texture.class);
+        manager.load("Exit_inactive.png", Texture.class);
+        manager.load("parallax1.png", Texture.class);
+        manager.load("parallax2.png", Texture.class);
+        manager.load("parallax3.png", Texture.class);
+        manager.load("parallax4.png", Texture.class);
+        manager.load("parallax5.png", Texture.class);
+        manager.load("parallax6.png", Texture.class);
         manager.finishLoading();
         return manager;
     }
