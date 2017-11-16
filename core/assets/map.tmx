@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="160" height="50" tilewidth="16" tileheight="16" nextobjectid="25">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="160" height="50" tilewidth="16" tileheight="16" nextobjectid="38">
  <tileset firstgid="1" source="tileset_gutter.tsx"/>
  <layer name="background" width="160" height="50" visible="0">
   <data encoding="base64" compression="zlib">
@@ -13,10 +13,11 @@
   <object id="21" x="992" y="560" width="320" height="16"/>
   <object id="23" x="976" y="560" width="16" height="16"/>
   <object id="24" x="1312" y="544" width="32" height="16"/>
+  <object id="36" x="448.795" y="704.488" width="27.9664" height="78.5724"/>
  </objectgroup>
  <layer name="graphics" width="160" height="50">
   <data encoding="base64" compression="zlib">
-   eJzt2sEJACAMBMGQ/ov24z8QDYjMwPZwj4sAAAAAAAAAAAAAAAAAAAAAAAAAAADgZbmDSg4EAECfPQYAAAAAAJyY+IL8HHctwu0A6Q==
+   eJzt2rEJACAMRUHJ/kPbWNgJkhCRO/gbvCKCYwAAAAAAAAAAAAAAAAAAAAAAAAAAAPCyWIOTKBgAAPfcYwAAQAbvAzrpj076o5P+6KQ/dhV/QX4euSaCFAD9
   </data>
  </layer>
 </map>

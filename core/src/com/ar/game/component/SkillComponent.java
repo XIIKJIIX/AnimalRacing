@@ -13,12 +13,14 @@ public class SkillComponent implements Component {
     public HashMap<Type, Float> type = new HashMap<>();
     public ShotType shotType;
     public ON_HIT onHit;
-    public float cooldown;
+    public float cooldown, speed, acc;
 
-    public SkillComponent(ShotType shotType, ON_HIT onHit, float cooldown) {
+    public SkillComponent(ShotType shotType, ON_HIT onHit, float cooldown, float speed, float acc) {
         this.shotType = shotType;
         this.onHit = onHit;
         this.cooldown = cooldown;
+        this.speed = speed;
+        this.acc = acc;
     }
 
     public void addSkill(Type type, float amount) {

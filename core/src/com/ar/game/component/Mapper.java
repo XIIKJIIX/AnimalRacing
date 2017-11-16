@@ -13,4 +13,5 @@ public class Mapper {
     public static final ComponentMapper<TypeComponent> type = ComponentMapper.getFor(TypeComponent.class);
     public static final ComponentMapper<DataComponent> data = ComponentMapper.getFor(DataComponent.class);
     public static final ComponentMapper<AnimationComponent> animation = ComponentMapper.getFor(AnimationComponent.class);
+    public static final ComponentMapper<SkillComponent> skill = ComponentMapper.getFor(SkillComponent.class);
 }

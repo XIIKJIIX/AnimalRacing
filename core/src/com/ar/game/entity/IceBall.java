@@ -28,7 +28,7 @@ public class IceBall extends Entity implements Skill {
 
     @Inject
     public IceBall(World world) {
-        skill = new SkillComponent(SkillComponent.ShotType.BULLET, SkillComponent.ON_HIT.GONE, 10f);
+        skill = new SkillComponent(SkillComponent.ShotType.BULLET, SkillComponent.ON_HIT.GONE, 10f, 0.04f, 1.025f);
         skill.addSkill(SkillComponent.Type.DAMAGE, 15f);
         skill.addSkill(SkillComponent.Type.SLOW, 35f);
         add(skill);
@@ -42,7 +42,7 @@ public class IceBall extends Entity implements Skill {
         BodyDef bodyDef = new BodyDef();
         FixtureDef fixtureDef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        bodyDef.type = BodyDef.BodyType.StaticBody;
         body = world.createBody(bodyDef);
         shape.setRadius(data.height);
         fixtureDef.shape = shape;
@@ -77,4 +77,10 @@ public class IceBall extends Entity implements Skill {
         add(physics);
         add(transform);
     }
+
+    @Override
+    public Body getBody() {
+        return body;
+    }
+
 }

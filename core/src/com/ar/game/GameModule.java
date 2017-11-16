@@ -73,7 +73,9 @@ public class GameModule implements Module {
                 HealthSystem.class,
                 DyingSystem.class,
                 AnimateSystem.class,
-                StateUpdateSystem.class
+                StateUpdateSystem.class,
+                SkillUpdateSystem.class,
+                CleanupSystem.class
         ));
     }
     @Provides

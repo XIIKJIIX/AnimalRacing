@@ -73,7 +73,7 @@ public class PlayerControlSystem extends IteratingSystem {
 
         if (Gdx.input.isKeyJustPressed(player.castKey)) {
             Skill skill = SkillMapper.map(player.orbs);
-            skill.setTransform(new Vector2(transform.position.x + (4f/PPM), transform.position.y));
+            skill.setTransform(new Vector2(transform.position.x + (30f/PPM), transform.position.y));
             engine.addEntity((Entity) skill);
         }
 
