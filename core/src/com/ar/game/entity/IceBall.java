@@ -84,4 +84,13 @@ public class IceBall extends Entity implements Skill {
         return body;
     }
 
+    @Override
+    public float getCooldown() {
+        return skill.cooldown;
+    }
+
+    @Override
+    public String toString() {
+        return "ICEBALL";
+    }
 }

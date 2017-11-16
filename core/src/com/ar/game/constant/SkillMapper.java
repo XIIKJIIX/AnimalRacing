@@ -9,10 +9,10 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Queue;
 
 public class SkillMapper {
-    public static Skill map(Queue<Orb> orbs){
+    public static Skill map(String orbs){
         World world = AnimalRacing.injector.getInstance(World.class);
         Skill skill;
-        switch (orbs.toString()) {
+        switch (orbs) {
             case "[QUARZ, QUARZ]":
                 skill = new IceBall(world);
                 break;

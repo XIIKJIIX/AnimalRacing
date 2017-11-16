@@ -1,9 +1,6 @@
 package com.ar.game.system;
 
-import com.ar.game.component.Mapper;
-import com.ar.game.component.PhysicsComponent;
-import com.ar.game.component.SkillComponent;
-import com.ar.game.component.TransformComponent;
+import com.ar.game.component.*;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;

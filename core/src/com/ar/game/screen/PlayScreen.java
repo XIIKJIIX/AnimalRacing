@@ -78,12 +78,12 @@ public class PlayScreen extends ScreenAdapter {
         player1.add(new AnimationComponent(stateAnimation));
         frames.clear();
         engine.addEntity(player1);
-        engine.addEntity(new Player(
-                world,
-                new PlayerComponent(A, D, W, Q, 300F, R, Z, X),
-                new TypeComponent(TypeComponent.PLAYER),
-                new DataComponent(20F / PPM, 20F / PPM, "Player2")
-        ));
+//        engine.addEntity(new Player(
+//                world,
+//                new PlayerComponent(A, D, W, Q, 300F, R, Z, X),
+//                new TypeComponent(TypeComponent.PLAYER),
+//                new DataComponent(20F / PPM, 20F / PPM, "Player2")
+//        ));
 
     }
 

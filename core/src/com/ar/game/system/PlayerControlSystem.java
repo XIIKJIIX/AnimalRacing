@@ -72,9 +72,20 @@ public class PlayerControlSystem extends IteratingSystem {
         }
 
         if (Gdx.input.isKeyJustPressed(player.castKey)) {
-            Skill skill = SkillMapper.map(player.orbs);
-            skill.setTransform(new Vector2(transform.position.x + (30f/PPM), transform.position.y));
-            engine.addEntity((Entity) skill);
+            if (player.currSkill != null) {
+                String skillOrb = player.currSkill;
+                if (player.cooldown.get(skillOrb) > 0) {
+                    System.out.println(player.currSkill + " is on cooldown. "+player.cooldown.get(skillOrb));
+                } else {
+                    Skill skill = SkillMapper.map(player.currSkill);
+                    skill.setTransform(new Vector2(transform.position.x + (30f/PPM), transform.position.y));
+                    player.cooldown.put(player.currSkill, skill.getCooldown());
+                    engine.addEntity((Entity) skill);
+                }
+            } else {
+                System.out.println("Invoke First");
+            }
+
         }
 
         if (Gdx.input.isKeyJustPressed(player.addQuarz)) {
@@ -89,5 +100,11 @@ public class PlayerControlSystem extends IteratingSystem {
             System.out.println(player.orbs);
         }
 
+        if (Gdx.input.isKeyJustPressed(player.invokeKey)) {
+            player.currSkill = player.orbs.toString();
+            System.out.println(player.currSkill);
+        }
+
+        player.cooldown.replaceAll((k, v) -> Math.max(v - deltaTime, 0));
     }
 }
