@@ -53,7 +53,7 @@ public class PlayScreen extends ScreenAdapter {
     private void createEntities() {
         Entity player1 = new Player(
                 world,
-                new PlayerComponent(LEFT, RIGHT, UP, SHIFT_RIGHT, 300F, ENTER, COMMA, PERIOD, SLASH),
+                new PlayerComponent(LEFT, RIGHT, UP, SHIFT_RIGHT, 300F, ENTER, PERIOD, SLASH),
                 new TypeComponent(TypeComponent.PLAYER),
                 new DataComponent(20F / PPM, 20F / PPM, "Player1")
         );
@@ -80,7 +80,7 @@ public class PlayScreen extends ScreenAdapter {
         engine.addEntity(player1);
         engine.addEntity(new Player(
                 world,
-                new PlayerComponent(A, D, W, Q, 300F, R, Z, X, C),
+                new PlayerComponent(A, D, W, Q, 300F, R, Z, X),
                 new TypeComponent(TypeComponent.PLAYER),
                 new DataComponent(20F / PPM, 20F / PPM, "Player2")
         ));

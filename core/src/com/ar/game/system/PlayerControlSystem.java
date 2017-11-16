@@ -83,12 +83,6 @@ public class PlayerControlSystem extends IteratingSystem {
             System.out.println(player.orbs);
         }
 
-        if (Gdx.input.isKeyJustPressed(player.addWex)) {
-            player.orbs.addFirst(PlayerComponent.Orb.WEX);
-            player.orbs.removeLast();
-            System.out.println(player.orbs);
-        }
-
         if (Gdx.input.isKeyJustPressed(player.addExort)) {
             player.orbs.addFirst(PlayerComponent.Orb.EXORT);
             player.orbs.removeLast();

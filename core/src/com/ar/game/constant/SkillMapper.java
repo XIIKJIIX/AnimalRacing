@@ -13,7 +13,7 @@ public class SkillMapper {
         World world = AnimalRacing.injector.getInstance(World.class);
         Skill skill;
         switch (orbs.toString()) {
-            case "[QUARZ, QUARZ, QUARZ]":
+            case "[QUARZ, QUARZ]":
                 skill = new IceBall(world);
                 break;
             default:
