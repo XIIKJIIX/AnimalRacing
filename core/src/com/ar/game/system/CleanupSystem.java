@@ -1,9 +1,6 @@
 package com.ar.game.system;
 
-import com.ar.game.component.Mapper;
-import com.ar.game.component.PhysicsComponent;
-import com.ar.game.component.SkillComponent;
-import com.ar.game.component.TransformComponent;
+import com.ar.game.component.*;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
@@ -28,13 +25,15 @@ public class CleanupSystem extends IteratingSystem {
     protected void processEntity(Entity entity, float deltaTime) {
         TransformComponent transform = Mapper.transform.get(entity);
         PhysicsComponent physics = Mapper.physics.get(entity);
+        DataComponent data = Mapper.data.get(entity);
 
         float x = transform.position.x;
         float y = transform.position.y;
 
         if (x <= (camera.position.x - camera.viewportWidth / 2) || y <= (camera.position.y - camera.viewportHeight / 2) || x >= (camera.position.x + camera.viewportWidth / 2)) {
-            System.out.println("ICE_BALL killed");
+            System.out.println("clear "+ data.name);
             world.destroyBody(physics.body);
+            entity.removeAll();
             engine.removeEntity(entity);
         }
     }

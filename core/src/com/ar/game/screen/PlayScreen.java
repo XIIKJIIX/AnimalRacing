@@ -24,6 +24,7 @@ import com.google.inject.Inject;
 
 import java.util.HashMap;
 
+import static com.ar.game.MapBuilder.buildShapes;
 import static com.ar.game.constant.B2Dvars.PPM;
 import static com.badlogic.gdx.Input.Keys.*;
 import static com.ar.game.component.StateComponent.State.*;

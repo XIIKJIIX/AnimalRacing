@@ -44,6 +44,7 @@ public class DyingSystem extends IteratingSystem {
         PhysicsComponent physics = Mapper.physics.get(entity);
         DataComponent data = Mapper.data.get(entity);
         world.destroyBody(physics.body);
+        entity.removeAll();
         engine.removeEntity(entity);
         Gdx.app.log(data.name + " Status", "Died");
     }

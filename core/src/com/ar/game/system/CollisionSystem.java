@@ -10,19 +10,20 @@ public class CollisionSystem extends IteratingSystem {
 
     @Inject
     public CollisionSystem() {
-        super(Family.all(CollisionComponent.class, PlayerComponent.class).get());
+        super(Family.all(CollisionComponent.class).get());
     }
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         // Get player collision component
         CollisionComponent collision = Mapper.collision.get(entity);
-        PhysicsComponent physics = Mapper.physics.get(entity);
         DataComponent data = Mapper.data.get(entity);
         Entity collidedEntity = collision.getCollidedEntity();
+
         if (collidedEntity != null) {
             DataComponent colData = Mapper.data.get(collidedEntity);
             TypeComponent type = Mapper.type.get(collidedEntity);
+
             if (type != null) {
                 switch (type.getGroup()) {
                     case TypeComponent.PLAYER:
@@ -34,6 +35,11 @@ public class CollisionSystem extends IteratingSystem {
                     case TypeComponent.ITEM:
                         System.out.println("Player take with Item");
                         break;
+                    case TypeComponent.SKILL:
+                        System.out.println(data.name + " collide with "+colData.name);
+                        break;
+                    default:
+                        System.out.println("XX");
                 }
                 collision.setCollidedEntity(null);
             }
