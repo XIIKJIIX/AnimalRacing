@@ -52,19 +52,19 @@ public class PlayScreen extends ScreenAdapter {
     private void createEntities() {
         Entity player1 = new Player(
                 world,
-                new PlayerComponent(LEFT, RIGHT, UP, SHIFT_RIGHT, 300F),
+                new PlayerComponent(LEFT, RIGHT, UP, SHIFT_RIGHT, 300F, ENTER, COMMA, PERIOD, SLASH),
                 new TypeComponent(TypeComponent.PLAYER),
                 new DataComponent(20F / PPM, 20F / PPM, "Player1")
         );
         TextureAtlas atlas = new TextureAtlas("bear_all.txt");
         Array<TextureRegion> frames = new Array<>();
         for (int i = 0; i < 4; i++) {
-            frames.add(new TextureRegion(atlas.findRegion("bear_run"), i * 160, 0, 160, 273));
+            frames.add(new TextureRegion(atlas.findRegion("bear_run"), i, 0, 160, 273));
         }
         Animation player1Run = new Animation(0.1f, frames);
         frames.clear();
         for (int i = 0; i < 4; i++) {
-            frames.add(new TextureRegion(atlas.findRegion("bear_jump"), i * 160, 0, 160, 273));
+            frames.add(new TextureRegion(atlas.findRegion("bear_jump"), i, 0, 160, 273));
         }
         Animation player1Jump = new Animation(0.1f, frames);
         frames.clear();

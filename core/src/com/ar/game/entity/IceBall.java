@@ -56,7 +56,7 @@ public class IceBall extends Entity implements Skill {
         TextureAtlas atlas = new TextureAtlas("skills/ice_ball.txt");
         Array<TextureRegion> frames = new Array<>();
         for (int i = 0; i < 6; i++) {
-            frames.add(new TextureRegion(atlas.findRegion((i+1)+""), 0, 197*i, 512, 197));
+            frames.add(new TextureRegion(atlas.findRegion((i+1)+""), 0, 0, 512, 197));
         }
         Animation animation = new Animation(0.1f, frames);
         frames.clear();
@@ -75,5 +75,6 @@ public class IceBall extends Entity implements Skill {
         body.setTransform(transform.position, 0);
         physics = new PhysicsComponent(body);
         add(physics);
+        add(transform);
     }
 }

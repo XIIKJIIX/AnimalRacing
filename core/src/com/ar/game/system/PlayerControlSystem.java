@@ -13,6 +13,7 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -70,13 +71,29 @@ public class PlayerControlSystem extends IteratingSystem {
             state.set(JUMPING);
         }
 
-        if (controller.KEY_MAP.get(player.castKey)) {
+        if (Gdx.input.isKeyJustPressed(player.castKey)) {
             Skill skill = SkillMapper.map(player.orbs);
             skill.setTransform(new Vector2(transform.position.x + (4f/PPM), transform.position.y));
             engine.addEntity((Entity) skill);
         }
 
-        state.stateTimer = state.state == state.prevState ? state.stateTimer + deltaTime: 0;
-        state.prevState = state.state;
+        if (Gdx.input.isKeyJustPressed(player.addQuarz)) {
+            player.orbs.addFirst(PlayerComponent.Orb.QUARZ);
+            player.orbs.removeLast();
+            System.out.println(player.orbs);
+        }
+
+        if (Gdx.input.isKeyJustPressed(player.addWex)) {
+            player.orbs.addFirst(PlayerComponent.Orb.WEX);
+            player.orbs.removeLast();
+            System.out.println(player.orbs);
+        }
+
+        if (Gdx.input.isKeyJustPressed(player.addExort)) {
+            player.orbs.addFirst(PlayerComponent.Orb.EXORT);
+            player.orbs.removeLast();
+            System.out.println(player.orbs);
+        }
+
     }
 }

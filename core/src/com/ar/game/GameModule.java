@@ -72,10 +72,10 @@ public class GameModule implements Module {
 //                CameraSystem.class,
                 HealthSystem.class,
                 DyingSystem.class,
-                AnimateSystem.class
+                AnimateSystem.class,
+                StateUpdateSystem.class
         ));
     }
-
     @Provides
     @Singleton
     public AssetManager asset() {
