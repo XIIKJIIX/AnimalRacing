@@ -31,18 +31,20 @@ public class MainMenuScreen extends ScreenAdapter {
     private Texture playButtonInactiveImage;
     private Texture instructionButtonActiveImage;
     private Texture instructionButtonInactiveImage;
-    private Texture parallax1;
-    private Texture parallax2;
-    private Texture parallax3;
-    private Texture parallax4;
-    private Texture parallax5;
-    private Texture parallax6;
+
     private ImageButton playButtonActive;
     private ImageButton playButtonInactive;
     private ImageButton instructionButtonActive;
     private ImageButton instructionButtonInactive;
     private ImageButton exitButtonActive;
     private ImageButton exitButtonInactive;
+
+    private Texture parallax1;
+    private Texture parallax2;
+    private Texture parallax3;
+    private Texture parallax4;
+    private Texture parallax5;
+    private Texture parallax6;
 
     private Game game2;
     private OrthographicCamera camera;
@@ -70,7 +72,6 @@ public class MainMenuScreen extends ScreenAdapter {
         parallax4 = manager.get("parallax4.png", Texture.class);
         parallax5 = manager.get("parallax5.png", Texture.class);
         parallax6 = manager.get("parallax6.png", Texture.class);
-
     }
 
     public void Composition(Game aGame) {
@@ -130,9 +131,6 @@ public class MainMenuScreen extends ScreenAdapter {
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor){
                 stage.addActor(instructionButtonActive);
             }
-            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor){
-                instructionButtonActive.remove();
-            }
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 game.dispose();
                 game.injector.getInstance(Systems.class).list.stream()
@@ -144,10 +142,8 @@ public class MainMenuScreen extends ScreenAdapter {
         });
 
         instructionButtonActive.addListener(new ClickListener() {
-            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor){
-                instructionButtonActive.remove();
-            }
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor){
+                instructionButtonActive.remove();
                 stage.addActor(instructionButtonInactive);
             }
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -166,9 +162,6 @@ public class MainMenuScreen extends ScreenAdapter {
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor){
                 stage.addActor(playButtonActive);
             }
-            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor){
-                playButtonActive.remove();
-            }
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 game.dispose();
                 game.injector.getInstance(Systems.class).list.stream()
@@ -180,10 +173,8 @@ public class MainMenuScreen extends ScreenAdapter {
         });
 
         playButtonActive.addListener(new ClickListener() {
-            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor){
-                playButtonActive.remove();
-            }
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor){
+                playButtonActive.remove();
                 stage.addActor(playButtonInactive);
             }
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -202,9 +193,6 @@ public class MainMenuScreen extends ScreenAdapter {
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor){
                 stage.addActor(exitButtonActive);
             }
-            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor){
-                exitButtonActive.remove();
-            }
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 UIManager.put("OptionPane.minimumSize",new Dimension(AnimalRacing.V_WIDTH,AnimalRacing.V_HEIGHT/2));
                 int n = JOptionPane.showOptionDialog(null,
@@ -222,10 +210,8 @@ public class MainMenuScreen extends ScreenAdapter {
         });
 
         exitButtonActive.addListener(new ClickListener() {
-            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor){
-                exitButtonActive.remove();
-            }
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor){
+                exitButtonActive.remove();
                 stage.addActor(exitButtonInactive);
             }
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -253,7 +239,6 @@ public class MainMenuScreen extends ScreenAdapter {
         stage = new Stage(new ScreenViewport());
         Composition(game);
         Gdx.input.setInputProcessor(stage);
-
     }
 
     @Override
