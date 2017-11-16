@@ -78,12 +78,19 @@ public class PlayScreen extends ScreenAdapter {
         player1.add(new AnimationComponent(stateAnimation));
         frames.clear();
         engine.addEntity(player1);
+        engine.addEntity(new Player(
+                world,
+                new PlayerComponent(A, D, W, Q, 300F, R, Z, X, C),
+                new TypeComponent(TypeComponent.PLAYER),
+                new DataComponent(20F / PPM, 20F / PPM, "Player2")
+        ));
+
     }
 
     private void createMap() {
         tiledMap = new TmxMapLoader().load("map.tmx");
         tmr = new OrthogonalTiledMapRenderer(tiledMap, (float) 1 / PPM);
-        MapBuilder.buildShapes(tiledMap, PPM, world, "ground");
+        MapBuilder.buildShapes(tiledMap, PPM, world, "ground", engine);
     }
 
     @Override

@@ -30,7 +30,7 @@ public class IceBall extends Entity implements Skill {
     public IceBall(World world) {
         skill = new SkillComponent(SkillComponent.ShotType.BULLET, SkillComponent.ON_HIT.GONE, 10f, 0.04f, 1.02f);
         skill.addSkill(SkillComponent.Type.DAMAGE, 15f);
-        skill.addSkill(SkillComponent.Type.SLOW, 35f);
+        skill.addSkill(SkillComponent.Type.SLOW, 0.35f);
         add(skill);
 
         data = new DataComponent(5f / PPM, 5f / PPM, "ICE_BALL");

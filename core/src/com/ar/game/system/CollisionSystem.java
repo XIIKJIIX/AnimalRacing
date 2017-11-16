@@ -1,16 +1,23 @@
 package com.ar.game.system;
 
 import com.ar.game.component.*;
+import com.ar.game.entity.IceBall;
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.physics.box2d.World;
 import com.google.inject.Inject;
 
 public class CollisionSystem extends IteratingSystem {
-
+    private World world;
+    private Engine engine;
     @Inject
-    public CollisionSystem() {
+    public CollisionSystem(Engine engine, World world) {
         super(Family.all(CollisionComponent.class).get());
+        this.engine = engine;
+        this.world = world;
     }
 
     @Override
@@ -22,27 +29,48 @@ public class CollisionSystem extends IteratingSystem {
 
         if (collidedEntity != null) {
             DataComponent colData = Mapper.data.get(collidedEntity);
-            TypeComponent type = Mapper.type.get(collidedEntity);
+            TypeComponent colType = Mapper.type.get(collidedEntity);
 
-            if (type != null) {
-                switch (type.getGroup()) {
-                    case TypeComponent.PLAYER:
-                        System.out.println(data.name + " collide with " + colData.name);
-                        break;
-                    case TypeComponent.SCENERY:
-                        System.out.println("Player collide with Scene");
-                        break;
-                    case TypeComponent.ITEM:
-                        System.out.println("Player take with Item");
-                        break;
-                    case TypeComponent.SKILL:
-                        System.out.println(data.name + " collide with "+colData.name);
-                        break;
-                    default:
-                        System.out.println("XX");
+            if (colType != null) {
+                short group = colType.getGroup();
+                SkillComponent skill = Mapper.skill.get(entity);
+                if (skill != null) {
+                    if (entity instanceof IceBall) {
+                        switch (group) {
+                            case TypeComponent.PLAYER:
+                                PlayerComponent player = Mapper.player.get(collidedEntity);
+                                PhysicsComponent physics = Mapper.physics.get(collidedEntity);
+                                processSkill(player, skill, physics);
+                            case TypeComponent.SCENERY:
+                                SystemHelper.removeEntity(entity, world, engine);
+                                break;
+                            default:
+                                System.out.println("hit nope");
+                        }
+                    }
                 }
                 collision.setCollidedEntity(null);
             }
         }
+    }
+
+    private void processSkill(PlayerComponent player, SkillComponent skill, PhysicsComponent physics) {
+        skill.type.forEach((k, v) -> {
+            switch (k) {
+                case HEAL:
+                    player.health = Math.min(player.maxHealth, player.health+v);
+                    break;
+                case SLOW:
+                    physics.body.setLinearVelocity(
+                            MathUtils.lerp(physics.body.getLinearVelocity().x, 0F, v),
+                            physics.body.getLinearVelocity().y
+                    );
+                    break;
+                case DAMAGE:
+                    player.health = Math.max(0, player.health-v);
+                default:
+                    System.out.println("Skill did nothing");
+            }
+        });
     }
 }

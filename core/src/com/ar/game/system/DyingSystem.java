@@ -31,22 +31,15 @@ public class DyingSystem extends IteratingSystem {
     protected void processEntity(Entity entity, float deltaTime) {
         PlayerComponent player = Mapper.player.get(entity);
         TransformComponent transform = Mapper.transform.get(entity);
+        DataComponent data = Mapper.data.get(entity);
 
         float x = transform.position.x;
         float y = transform.position.y;
 
         if (x <= (camera.position.x - camera.viewportWidth / 2) || y <= (camera.position.y - camera.viewportHeight / 2) || player.health <= 0) {
-            remove(entity);
+            Gdx.app.log(data.name + " Status", "Died");
+            SystemHelper.removeEntity(entity, world, engine);
         }
-    }
-
-    private void remove(Entity entity) {
-        PhysicsComponent physics = Mapper.physics.get(entity);
-        DataComponent data = Mapper.data.get(entity);
-        world.destroyBody(physics.body);
-        entity.removeAll();
-        engine.removeEntity(entity);
-        Gdx.app.log(data.name + " Status", "Died");
     }
 
     @Override

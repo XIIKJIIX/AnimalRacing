@@ -1,5 +1,11 @@
 package com.ar.game;
 
+import com.ar.game.component.CollisionComponent;
+import com.ar.game.component.DataComponent;
+import com.ar.game.component.PhysicsComponent;
+import com.ar.game.component.TypeComponent;
+import com.badlogic.ashley.core.Engine;
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
@@ -16,8 +22,7 @@ public class MapBuilder {
     // The pixels per tile. If your tiles are 16x16, this is set to 16f
     private static float ppt = 0;
 
-    @Inject
-    public static Array<Body> buildShapes(Map map, float pixels, World world, String layer) {
+    public static Array<Body> buildShapes(Map map, float pixels, World world, String layer, Engine engine) {
         ppt = pixels;
         MapObjects objects = map.getLayers().get(layer).getObjects();
 
@@ -52,6 +57,13 @@ public class MapBuilder {
             Body body = world.createBody(bd);
             body.createFixture(shape, 1);
 
+            Entity block = new Entity();
+            block.add(new CollisionComponent());
+            body.setUserData(block);
+            block.add(new PhysicsComponent(body));
+            block.add(new DataComponent(0, 0, "Floor"));
+            block.add(new TypeComponent(TypeComponent.SCENERY));
+            engine.addEntity(block);
             bodies.add(body);
 
             shape.dispose();

@@ -25,16 +25,12 @@ public class CleanupSystem extends IteratingSystem {
     protected void processEntity(Entity entity, float deltaTime) {
         TransformComponent transform = Mapper.transform.get(entity);
         PhysicsComponent physics = Mapper.physics.get(entity);
-        DataComponent data = Mapper.data.get(entity);
-
         float x = transform.position.x;
         float y = transform.position.y;
 
         if (x <= (camera.position.x - camera.viewportWidth / 2) || y <= (camera.position.y - camera.viewportHeight / 2) || x >= (camera.position.x + camera.viewportWidth / 2)) {
-            System.out.println("clear "+ data.name);
-            world.destroyBody(physics.body);
-            entity.removeAll();
-            engine.removeEntity(entity);
+            SystemHelper.removeEntity(entity, world, engine);
         }
     }
+
 }

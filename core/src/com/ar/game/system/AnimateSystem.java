@@ -1,6 +1,8 @@
 package com.ar.game.system;
 
 import com.ar.game.component.*;
+import com.ar.game.entity.IceBall;
+import com.ar.game.entity.Skill;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
@@ -59,13 +61,23 @@ public class AnimateSystem extends IteratingSystem {
         }
         float width = region.getRegionWidth();
         float height = region.getRegionHeight();
-        batch.draw(
-                region,
-                transform.position.x - (data.width / 2) - 0.15f,
-                transform.position.y - (data.height / 2) - 0.15f,
-                width / PPM / 4,
-                height / PPM / 4
-        );
+        if (entity instanceof IceBall) {
+            batch.draw(
+                    region,
+                    transform.position.x - 0.8f,
+                    transform.position.y - 0.27f,
+                    width / PPM / 6,
+                    height / PPM / 6
+            );
+        } else { // Player
+            batch.draw(
+                    region,
+                    transform.position.x - (data.width / 2) - 0.15f,
+                    transform.position.y - (data.height / 2) - 0.15f,
+                    width / PPM / 4,
+                    height / PPM / 4
+            );
+        }
     }
 
     @Override
