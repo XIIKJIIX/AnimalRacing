@@ -78,7 +78,13 @@ public class PlayerControlSystem extends IteratingSystem {
                     System.out.println(player.currSkill + " is on cooldown. "+player.cooldown.get(skillOrb));
                 } else {
                     Skill skill = SkillMapper.map(player.currSkill);
-                    skill.setTransform(new Vector2(transform.position.x + (30f/PPM), transform.position.y));
+                    SkillComponent skillComponent = Mapper.skill.get((Entity) skill);
+                    if (!state.isRunningRight) {
+                        skillComponent.isRight = false;
+                        skill.setTransform(new Vector2(transform.position.x - (30f/PPM), transform.position.y));
+                    } else {
+                        skill.setTransform(new Vector2(transform.position.x + (30f/PPM), transform.position.y));
+                    }
                     player.cooldown.put(player.currSkill, skill.getCooldown());
                     engine.addEntity((Entity) skill);
                 }

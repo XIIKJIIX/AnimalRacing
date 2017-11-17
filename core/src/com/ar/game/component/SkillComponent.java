@@ -14,6 +14,7 @@ public class SkillComponent implements Component {
     public ShotType shotType;
     public ON_HIT onHit;
     public float cooldown, speed, acc;
+    public boolean isRight = true;
 
     public SkillComponent(ShotType shotType, ON_HIT onHit, float cooldown, float speed, float acc) {
         this.shotType = shotType;

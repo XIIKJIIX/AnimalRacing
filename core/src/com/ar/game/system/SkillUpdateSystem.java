@@ -23,8 +23,10 @@ public class SkillUpdateSystem extends IteratingSystem {
 
         switch (skill.shotType) {
             case BULLET:
+                float speed = skill.speed;
+                if (!skill.isRight) speed = -speed;
                 physics.body.setLinearVelocity(
-                        MathUtils.lerp(xVelocity, 5F, 0.2F),
+                        MathUtils.lerp(xVelocity, speed, skill.acc),
                         yVelocity
                 );
                 break;
