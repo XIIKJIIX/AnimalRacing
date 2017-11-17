@@ -20,6 +20,8 @@ public class PlayerComponent implements Component {
     public int leftKey, rightKey, upKey, castKey, invokeKey, addQuarz, addExort;
     public float health;
     public float maxHealth;
+    public float spRate = 1;
+    public float debufTime = 0;
 
     public PlayerComponent(int leftKey,
                            int rightKey,

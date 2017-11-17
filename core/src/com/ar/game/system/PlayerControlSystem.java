@@ -35,6 +35,7 @@ public class PlayerControlSystem extends IteratingSystem {
         PlayerComponent player = Mapper.player.get(entity);
         PhysicsComponent physics = Mapper.physics.get(entity);
         TransformComponent transform = Mapper.transform.get(entity);
+        DataComponent data = Mapper.data.get(entity);
 
         float yVelocity = physics.body.getLinearVelocity().y;
         float xVelocity = physics.body.getLinearVelocity().x;
@@ -50,13 +51,13 @@ public class PlayerControlSystem extends IteratingSystem {
 
         if (controller.KEY_MAP.get(player.leftKey))
             physics.body.setLinearVelocity(
-                    MathUtils.lerp(xVelocity, -5F, 0.2F),
+                    MathUtils.lerp(xVelocity, player.spRate*(-5F), 0.2F),
                     yVelocity
                 );
 
         if (controller.KEY_MAP.get(player.rightKey))
             physics.body.setLinearVelocity(
-                    MathUtils.lerp(xVelocity, 5F, 0.2F),
+                    MathUtils.lerp(xVelocity, player.spRate*5F, 0.2F),
                     yVelocity
             );
 
@@ -112,5 +113,7 @@ public class PlayerControlSystem extends IteratingSystem {
         }
 
         player.cooldown.replaceAll((k, v) -> Math.max(v - deltaTime, 0));
+        player.debufTime = Math.max(player.debufTime-deltaTime, 0);
+        if (player.debufTime == 0) player.spRate = 1;
     }
 }

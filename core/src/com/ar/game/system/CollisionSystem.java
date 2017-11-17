@@ -61,10 +61,8 @@ public class CollisionSystem extends IteratingSystem {
                     player.health = Math.min(player.maxHealth, player.health+v);
                     break;
                 case SLOW:
-                    physics.body.setLinearVelocity(
-                            MathUtils.lerp(physics.body.getLinearVelocity().x, 0F, v),
-                            physics.body.getLinearVelocity().y
-                    );
+                    player.spRate -= v;
+                    player.debufTime = 3;
                     break;
                 case DAMAGE:
                     player.health = Math.max(0, player.health-v);
