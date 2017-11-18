@@ -7,6 +7,8 @@ import static com.ar.game.component.StateComponent.State.*;
 import static com.ar.game.constant.B2Dvars.PPM;
 
 import com.ar.game.constant.SkillMapper;
+import com.ar.game.entity.Bomb;
+import com.ar.game.entity.IceBall;
 import com.ar.game.entity.Skill;
 import com.ar.game.handler.KeyboardController;
 import com.badlogic.ashley.core.Engine;
@@ -75,17 +77,27 @@ public class PlayerControlSystem extends IteratingSystem {
         if (Gdx.input.isKeyJustPressed(player.castKey)) {
             if (player.currSkill != null) {
                 String skillOrb = player.currSkill;
-                if (player.cooldown.get(skillOrb) > 0) {
+                if (player.cooldown.get(skillOrb) < 0) {
                     System.out.println(player.currSkill + " is on cooldown. "+player.cooldown.get(skillOrb));
                 } else {
+                    float toLeft = 1;
                     Skill skill = SkillMapper.map(player.currSkill);
                     SkillComponent skillComponent = Mapper.skill.get((Entity) skill);
                     if (!state.isRunningRight) {
                         skillComponent.isRight = false;
-                        skill.setTransform(new Vector2(transform.position.x - (30f/PPM), transform.position.y));
-                    } else {
-                        skill.setTransform(new Vector2(transform.position.x + (30f/PPM), transform.position.y));
+                        toLeft = -1;
                     }
+
+                    if (skill instanceof IceBall) {
+                        skill.setTransform(new Vector2(transform.position.x + toLeft*(30f/PPM), transform.position.y));
+                    } else if (skill instanceof Bomb) {
+                        skill.setTransform(new Vector2(transform.position.x + toLeft*(40f/PPM), transform.position.y));
+                        PhysicsComponent skillPhysics = Mapper.physics.get((Entity) skill);
+                        skillPhysics.body.setLinearVelocity(toLeft*5f, 5f);
+                    } else {
+                        System.out.println("DEFF");
+                    }
+
                     player.cooldown.put(player.currSkill, skill.getCooldown());
                     engine.addEntity((Entity) skill);
                 }

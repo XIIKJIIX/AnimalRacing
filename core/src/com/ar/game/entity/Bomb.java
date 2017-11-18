@@ -19,10 +19,10 @@ public class Bomb extends Entity implements Skill {
 
     public Bomb(World world) {
         skill = new SkillComponent(SkillComponent.ShotType.PROJECTILE, SkillComponent.ON_HIT.GONE, 12f, 5f, 0.25f);
-        skill.addSkill(SkillComponent.Type.DAMAGE, 75f);
+        skill.addSkill(SkillComponent.Type.DAMAGE, 100f);
         add(skill);
 
-        data = new DataComponent(15f / PPM, 15f / PPM, "ICE_BALL");
+        data = new DataComponent(15f / PPM, 15f / PPM, "BOMB");
         add(data);
 
         type = new TypeComponent(TypeComponent.SKILL);
@@ -38,10 +38,13 @@ public class Bomb extends Entity implements Skill {
         fixtureDef.filter.groupIndex = type.getGroup();
         body.createFixture(fixtureDef);
         shape.dispose();
-        body.setGravityScale(0);
         body.setUserData(this);
 
         add(new CollisionComponent());
+
+        state = new StateComponent();
+        state.set(StateComponent.State.MOVING);
+        add(state);
     }
 
     @Override

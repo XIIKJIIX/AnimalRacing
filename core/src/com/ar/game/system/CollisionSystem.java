@@ -1,6 +1,7 @@
 package com.ar.game.system;
 
 import com.ar.game.component.*;
+import com.ar.game.entity.Bomb;
 import com.ar.game.entity.IceBall;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
@@ -35,18 +36,16 @@ public class CollisionSystem extends IteratingSystem {
                 short group = colType.getGroup();
                 SkillComponent skill = Mapper.skill.get(entity);
                 if (skill != null) {
-                    if (entity instanceof IceBall) {
-                        switch (group) {
-                            case TypeComponent.PLAYER:
-                                PlayerComponent player = Mapper.player.get(collidedEntity);
-                                PhysicsComponent physics = Mapper.physics.get(collidedEntity);
-                                processSkill(player, skill, physics);
-                            case TypeComponent.SCENERY:
-                                SystemHelper.removeEntity(entity, world, engine);
-                                break;
-                            default:
-                                System.out.println("hit nope");
-                        }
+                    switch (group) {
+                        case TypeComponent.PLAYER:
+                            PlayerComponent player = Mapper.player.get(collidedEntity);
+                            PhysicsComponent physics = Mapper.physics.get(collidedEntity);
+                            processSkill(player, skill, physics);
+                        case TypeComponent.SCENERY:
+                            SystemHelper.removeEntity(entity, world, engine);
+                            break;
+                        default:
+                            System.out.println("hit nope");
                     }
                 }
                 collision.setCollidedEntity(null);
@@ -66,6 +65,7 @@ public class CollisionSystem extends IteratingSystem {
                     break;
                 case DAMAGE:
                     player.health = Math.max(0, player.health-v);
+                    break;
                 default:
                     System.out.println("Skill did nothing");
             }

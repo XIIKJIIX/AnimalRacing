@@ -52,7 +52,6 @@ public class GameModule implements Module {
     @Provides
     @Singleton
     public OrthographicCamera camera() {
-
         OrthographicCamera camera = new OrthographicCamera();
         camera.setToOrtho(false, AnimalRacing.V_WIDTH / PPM , AnimalRacing.V_HEIGHT / PPM);
         camera.update();
@@ -71,7 +70,7 @@ public class GameModule implements Module {
                 PhysicsSynchronizationSystem.class,
 //                CameraSystem.class,
                 HealthSystem.class,
-                DyingSystem.class,
+//                DyingSystem.class,
                 AnimateSystem.class,
                 StateUpdateSystem.class,
                 SkillUpdateSystem.class,

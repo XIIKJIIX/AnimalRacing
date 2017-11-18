@@ -7,6 +7,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -62,14 +63,28 @@ public class AnimateSystem extends IteratingSystem {
         float width = region.getRegionWidth();
         float height = region.getRegionHeight();
         if (entity instanceof IceBall) {
-            batch.draw(
-                    region,
-                    transform.position.x - 0.8f,
-                    transform.position.y - 0.27f,
-                    width / PPM / 6,
-                    height / PPM / 6
-            );
+            SkillComponent skill = Mapper.skill.get(entity);
+            if (skill.isRight) {
+                batch.draw(
+                        region,
+                        transform.position.x - 0.8f,
+                        transform.position.y - 0.27f,
+                        width / PPM / 5,
+                        height / PPM / 5
+                );
+            } else {
+                batch.draw(
+                        region,
+                        transform.position.x,
+                        transform.position.y - 0.2f,
+                        width / PPM / 5,
+                        height / PPM / 5
+                );
+            }
+
         } else { // Player
+            PlayerComponent player = Mapper.player.get(entity);
+            if (player.debufTime > 0) batch.setColor(Color.NAVY);
             batch.draw(
                     region,
                     transform.position.x - (data.width / 2) - 0.15f,
@@ -78,6 +93,7 @@ public class AnimateSystem extends IteratingSystem {
                     height / PPM / 4
             );
         }
+        batch.setColor(Color.WHITE);
     }
 
     @Override
