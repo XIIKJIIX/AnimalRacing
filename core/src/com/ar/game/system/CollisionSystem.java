@@ -39,6 +39,7 @@ public class CollisionSystem extends IteratingSystem {
                 if (skill != null) {
                     switch (group) {
                         case TypeComponent.PLAYER:
+                            if (skill.shotType == SkillComponent.ShotType.OBJECT) break;
                             PlayerComponent player = Mapper.player.get(collidedEntity);
                             PhysicsComponent physics = Mapper.physics.get(collidedEntity);
                             processSkill(player, skill, physics);

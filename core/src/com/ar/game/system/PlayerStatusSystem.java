@@ -30,6 +30,7 @@ public class PlayerStatusSystem extends IteratingSystem{
         textureSkillMapper.put("[QUARZ, QUARZ]", manager.get("skills/iceball.png", Texture.class));
         textureSkillMapper.put("[EXORT, EXORT]", manager.get("skills/bomb.png", Texture.class));
         textureSkillMapper.put("[EXORT, QUARZ]", manager.get("skills/potion.png", Texture.class));
+        textureSkillMapper.put("[QUARZ, EXORT]", manager.get("skills/treetop.png", Texture.class));
     }
 
     @Override

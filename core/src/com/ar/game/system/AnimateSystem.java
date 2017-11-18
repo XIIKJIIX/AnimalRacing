@@ -1,10 +1,7 @@
 package com.ar.game.system;
 
 import com.ar.game.component.*;
-import com.ar.game.entity.Bomb;
-import com.ar.game.entity.IceBall;
-import com.ar.game.entity.Player;
-import com.ar.game.entity.Skill;
+import com.ar.game.entity.*;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
@@ -97,6 +94,14 @@ public class AnimateSystem extends IteratingSystem {
                         width / PPM / 1.25f,
                         height / PPM / 1.25f
                 );
+        } else if (entity instanceof Wall) {
+            batch.draw(
+                    region,
+                    transform.position.x - 0.4f,
+                    transform.position.y - 0.5f,
+                    width / PPM / 1.15f,
+                    height / PPM / 1.15f
+            );
         } else { // Player
             PlayerComponent player = Mapper.player.get(entity);
             if (player.debufTime > 0) batch.setColor(Color.NAVY);

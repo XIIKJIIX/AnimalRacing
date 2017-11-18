@@ -7,10 +7,7 @@ import static com.ar.game.component.StateComponent.State.*;
 import static com.ar.game.constant.B2Dvars.PPM;
 
 import com.ar.game.constant.SkillMapper;
-import com.ar.game.entity.Bomb;
-import com.ar.game.entity.Heal;
-import com.ar.game.entity.IceBall;
-import com.ar.game.entity.Skill;
+import com.ar.game.entity.*;
 import com.ar.game.handler.KeyboardController;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
@@ -100,8 +97,9 @@ public class PlayerControlSystem extends IteratingSystem {
                     } else if (skill instanceof Heal) {
                         skill.setTransform(new Vector2(transform.position.x, transform.position.y));
                         player.health = Math.min(player.health + skillComponent.type.get(SkillComponent.Type.HEAL), player.maxHealth);
-                    } else {
-                        System.out.println("DEFF");
+                    } else if (skill instanceof Wall) {
+                        skill.setTransform(new Vector2(transform.position.x - 0.4f, transform.position.y + 0.2f));
+                        engine.addEntity((Entity) skill);
                     }
 
                     player.cooldown.put(player.currSkill, skill.getCooldown());
