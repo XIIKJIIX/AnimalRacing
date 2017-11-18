@@ -91,6 +91,8 @@ public class GameModule implements Module {
         manager.load("skills/bomb.png", Texture.class);
         manager.load("skills/potion.png", Texture.class);
         manager.load("skills/treetop.png", Texture.class);
+        manager.load("skills/quarz.png", Texture.class);
+        manager.load("skills/exort.png", Texture.class);
         manager.finishLoading();
         return manager;
     }
