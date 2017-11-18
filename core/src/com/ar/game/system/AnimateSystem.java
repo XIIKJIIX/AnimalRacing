@@ -3,6 +3,7 @@ package com.ar.game.system;
 import com.ar.game.component.*;
 import com.ar.game.entity.Bomb;
 import com.ar.game.entity.IceBall;
+import com.ar.game.entity.Player;
 import com.ar.game.entity.Skill;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
@@ -57,13 +58,16 @@ public class AnimateSystem extends IteratingSystem {
                 region = (TextureRegion) animation.animation.get(NORMAL).getKeyFrame(state.stateTimer);
         }
 
-        if ((physics.body.getLinearVelocity().x < 0 || !state.isRunningRight) && !region.isFlipX()) {
-            region.flip(true, false);
-            state.isRunningRight = false;
-        } else if ((physics.body.getLinearVelocity().x > 0 || state.isRunningRight) && region.isFlipX()) {
-            region.flip(true, false);
-            state.isRunningRight = true;
+        if (entity instanceof Player) {
+            if ((physics.body.getLinearVelocity().x < 0 || !state.isRunningRight) && !region.isFlipX()) {
+                region.flip(true, false);
+                state.isRunningRight = false;
+            } else if ((physics.body.getLinearVelocity().x > 0 || state.isRunningRight) && region.isFlipX()) {
+                region.flip(true, false);
+                state.isRunningRight = true;
+            }
         }
+
         float width = region.getRegionWidth();
         float height = region.getRegionHeight();
         if (entity instanceof IceBall) {

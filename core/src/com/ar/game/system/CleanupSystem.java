@@ -24,7 +24,6 @@ public class CleanupSystem extends IteratingSystem {
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         TransformComponent transform = Mapper.transform.get(entity);
-        PhysicsComponent physics = Mapper.physics.get(entity);
         float x = transform.position.x;
         float y = transform.position.y;
 

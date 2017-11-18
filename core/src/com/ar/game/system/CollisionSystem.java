@@ -3,6 +3,7 @@ package com.ar.game.system;
 import com.ar.game.component.*;
 import com.ar.game.entity.Bomb;
 import com.ar.game.entity.IceBall;
+import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
@@ -42,6 +43,13 @@ public class CollisionSystem extends IteratingSystem {
                             PhysicsComponent physics = Mapper.physics.get(collidedEntity);
                             processSkill(player, skill, physics);
                         case TypeComponent.SCENERY:
+                            StateComponent skillState = Mapper.state.get(entity);
+                            PhysicsComponent skillPhysics = Mapper.physics.get(entity);
+                            if (entity instanceof Bomb) {
+                                world.destroyBody(skillPhysics.body);
+                                skillState.set(StateComponent.State.HIT);
+                            }
+                            if (skillState.state == StateComponent.State.HIT) break;
                             SystemHelper.removeEntity(entity, world, engine);
                             break;
                         default:
