@@ -1,6 +1,7 @@
 package com.ar.game.system;
 
 import com.ar.game.component.*;
+import com.ar.game.entity.Bomb;
 import com.ar.game.entity.IceBall;
 import com.ar.game.entity.Skill;
 import com.badlogic.ashley.core.Entity;
@@ -47,6 +48,9 @@ public class AnimateSystem extends IteratingSystem {
             case MOVING:
                 region = (TextureRegion) animation.animation.get(MOVING).getKeyFrame(state.stateTimer, true);
                 break;
+            case HIT:
+                region = (TextureRegion) animation.animation.get(HIT).getKeyFrame(state.stateTimer);
+                break;
             case NORMAL:
             case FALLING:
             default:
@@ -81,7 +85,14 @@ public class AnimateSystem extends IteratingSystem {
                         height / PPM / 5
                 );
             }
-
+        } else if (entity instanceof Bomb) {
+                batch.draw(
+                        region,
+                        transform.position.x - 0.25f,
+                        transform.position.y - 0.25f,
+                        width / PPM / 1.25f,
+                        height / PPM / 1.25f
+                );
         } else { // Player
             PlayerComponent player = Mapper.player.get(entity);
             if (player.debufTime > 0) batch.setColor(Color.NAVY);
