@@ -29,6 +29,10 @@ public class EndScreen extends ScreenAdapter {
     private Texture retryActive;
     private Texture player1;
     private Texture player2;
+    private Texture catInactive;
+    private Texture frogInactive;
+    private Texture bearInactive;
+    private Texture pandaInactive;
 
     private ImageButton homeButtonInactive;
     private ImageButton homeButtonActive;
@@ -50,8 +54,10 @@ public class EndScreen extends ScreenAdapter {
         homeActive = manager.get("Home_active.png", Texture.class);
         retryInactive = manager.get("Retry_inactive.png", Texture.class);
         retryActive = manager.get("Retry_active.png", Texture.class);
-        player1 = manager.get("cat_inactive.png", Texture.class);
-        player2 = manager.get("frog_inactive.png", Texture.class);
+        catInactive = manager.get("cat_inactive.png", Texture.class);
+        frogInactive = manager.get("frog_inactive.png", Texture.class);
+        bearInactive = manager.get("bear_inactive.png", Texture.class);
+        pandaInactive = manager.get("panda_inactive.png", Texture.class);
     }
 
     @Override
@@ -131,6 +137,32 @@ public class EndScreen extends ScreenAdapter {
 
         Gdx.input.setInputProcessor(stage);
 
+        // choose the characters
+
+        if (SelectCharacterScreenP1.characterP1 == "cat"){
+            player1 = catInactive;
+        }
+        else if (SelectCharacterScreenP1.characterP1 == "frog") {
+            player1 = frogInactive;
+        }
+        else if (SelectCharacterScreenP1.characterP1 == "bear") {
+            player1 = bearInactive;
+        }
+        else if (SelectCharacterScreenP1.characterP1 == "panda") {
+            player1 = pandaInactive;
+        }
+        if (SelectCharacterScreenP2.characterP2 == "cat"){
+            player2 = catInactive;
+        }
+        else if (SelectCharacterScreenP2.characterP2 == "frog") {
+            player2 = frogInactive;
+        }
+        else if (SelectCharacterScreenP2.characterP2 == "bear") {
+            player2 = bearInactive;
+        }
+        else if (SelectCharacterScreenP2.characterP2 == "panda") {
+            player2 = pandaInactive;
+        }
     }
 
     @Override
@@ -144,6 +176,7 @@ public class EndScreen extends ScreenAdapter {
         else {
             batch.draw(player2win, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         }
+
         batch.draw(player1, Gdx.graphics.getWidth()/2 - player1.getWidth()/2 - Gdx.graphics.getWidth()/4, Gdx.graphics.getHeight()/2 + player1.getHeight()/2);
         batch.draw(player2, Gdx.graphics.getWidth()/2 - player2.getWidth()/2 - Gdx.graphics.getWidth()/4, Gdx.graphics.getHeight()/2 - player2.getHeight()/2);
         batch.end();
