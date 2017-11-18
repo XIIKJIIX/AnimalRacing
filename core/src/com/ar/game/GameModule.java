@@ -83,19 +83,45 @@ public class GameModule implements Module {
     public AssetManager asset() {
         AssetManager manager = new AssetManager();
         manager.load("blank.png", Texture.class);
-        manager.load("blank.png", Texture.class);
+        
+        //MainMenuScreen
         manager.load("Play_active.png", Texture.class);
         manager.load("Play_inactive.png", Texture.class);
         manager.load("Instruction_active.png", Texture.class);
         manager.load("Instruction_inactive.png", Texture.class);
         manager.load("Exit_active.png", Texture.class);
         manager.load("Exit_inactive.png", Texture.class);
+        manager.load("logo.png", Texture.class);
+        manager.load("parallax0.png", Texture.class);
         manager.load("parallax1.png", Texture.class);
         manager.load("parallax2.png", Texture.class);
         manager.load("parallax3.png", Texture.class);
         manager.load("parallax4.png", Texture.class);
         manager.load("parallax5.png", Texture.class);
         manager.load("parallax6.png", Texture.class);
+        manager.load("parallax7.png", Texture.class);
+        manager.load("parallax8.png", Texture.class);
+        manager.load("parallax9.png", Texture.class);
+        manager.load("parallax10.png", Texture.class);
+
+        //InstructionScreen
+        manager.load("instruction1.png", Texture.class);
+        manager.load("instruction2.png", Texture.class);
+        manager.load("instruction3.png", Texture.class);
+        manager.load("instruction4.png", Texture.class);
+        manager.load("Previous_active.png", Texture.class);
+        manager.load("Previous_inactive.png", Texture.class);
+        manager.load("Next_active.png", Texture.class);
+        manager.load("Next_inactive.png", Texture.class);
+        manager.load("Home_active.png", Texture.class);
+        manager.load("Home_inactive.png", Texture.class);
+
+        //EndScreen
+        manager.load("endscreen_player1win.png", Texture.class);
+        manager.load("endscreen_player2win.png", Texture.class);
+        manager.load("Retry_active.png", Texture.class);
+        manager.load("Retry_inactive.png", Texture.class);
+        
         manager.finishLoading();
         return manager;
     }
