@@ -58,7 +58,7 @@ public class AnimateSystem extends IteratingSystem {
                 region = (TextureRegion) animation.animation.get(NORMAL).getKeyFrame(state.stateTimer);
         }
 
-        if (entity instanceof Player) {
+        if (entity instanceof Player || entity instanceof IceBall) {
             if ((physics.body.getLinearVelocity().x < 0 || !state.isRunningRight) && !region.isFlipX()) {
                 region.flip(true, false);
                 state.isRunningRight = false;

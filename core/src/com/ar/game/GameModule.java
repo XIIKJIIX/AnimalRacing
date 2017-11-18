@@ -74,8 +74,8 @@ public class GameModule implements Module {
                 AnimateSystem.class,
                 StateUpdateSystem.class,
                 SkillUpdateSystem.class,
-                CleanupSystem.class
-//                PlayerStatusSystem.class
+                CleanupSystem.class,
+                PlayerStatusSystem.class
         ));
     }
     @Provides
@@ -88,6 +88,8 @@ public class GameModule implements Module {
         manager.load("Exit_active.jpg", Texture.class);
         manager.load("Exit_inactive.jpg", Texture.class);
         manager.load("skills/iceball.png", Texture.class);
+        manager.load("skills/bomb.png", Texture.class);
+        manager.load("skills/potion.png", Texture.class);
         manager.finishLoading();
         return manager;
     }

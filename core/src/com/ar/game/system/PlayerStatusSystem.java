@@ -28,6 +28,8 @@ public class PlayerStatusSystem extends IteratingSystem{
         this.batch = batch;
         this.manager = manager;
         textureSkillMapper.put("[QUARZ, QUARZ]", manager.get("skills/iceball.png", Texture.class));
+        textureSkillMapper.put("[EXORT, EXORT]", manager.get("skills/bomb.png", Texture.class));
+        textureSkillMapper.put("[EXORT, QUARZ]", manager.get("skills/potion.png", Texture.class));
     }
 
     @Override
@@ -36,9 +38,15 @@ public class PlayerStatusSystem extends IteratingSystem{
         DataComponent data = Mapper.data.get(entity);
         if (data.name.equals("Player1")) {
             if (player.currSkill != null) {
-                System.out.println("player1 draw");
                 player1Skill = textureSkillMapper.get(player.currSkill);
-                batch.draw(player1Skill, camera.position.x, camera.position.y, 0.5f, 0.5f);
+                if (player1Skill != null)
+                batch.draw(
+                        player1Skill,
+                        camera.position.x - camera.viewportWidth / 2,
+                        camera.position.y + camera.viewportHeight / 3,
+                        0.5f,
+                        0.5f
+                );
             }
         }
     }

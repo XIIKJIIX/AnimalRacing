@@ -4,6 +4,7 @@ import com.ar.game.AnimalRacing;
 import com.ar.game.component.PlayerComponent;
 import com.ar.game.component.PlayerComponent.Orb;
 import com.ar.game.entity.Bomb;
+import com.ar.game.entity.Heal;
 import com.ar.game.entity.IceBall;
 import com.ar.game.entity.Skill;
 import com.badlogic.gdx.physics.box2d.World;
@@ -19,6 +20,9 @@ public class SkillMapper {
                 break;
             case "[EXORT, EXORT]":
                 skill = new Bomb(world);
+                break;
+            case "[EXORT, QUARZ]":
+                skill = new Heal();
                 break;
             default:
                 skill = new IceBall(world);

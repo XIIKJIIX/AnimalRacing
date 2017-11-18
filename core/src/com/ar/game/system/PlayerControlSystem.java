@@ -8,6 +8,7 @@ import static com.ar.game.constant.B2Dvars.PPM;
 
 import com.ar.game.constant.SkillMapper;
 import com.ar.game.entity.Bomb;
+import com.ar.game.entity.Heal;
 import com.ar.game.entity.IceBall;
 import com.ar.game.entity.Skill;
 import com.ar.game.handler.KeyboardController;
@@ -90,16 +91,20 @@ public class PlayerControlSystem extends IteratingSystem {
 
                     if (skill instanceof IceBall) {
                         skill.setTransform(new Vector2(transform.position.x + toLeft*(30f/PPM), transform.position.y));
+                        engine.addEntity((Entity) skill);
                     } else if (skill instanceof Bomb) {
                         skill.setTransform(new Vector2(transform.position.x + toLeft*(40f/PPM), transform.position.y));
                         PhysicsComponent skillPhysics = Mapper.physics.get((Entity) skill);
                         skillPhysics.body.setLinearVelocity(toLeft*5f, 5f);
+                        engine.addEntity((Entity) skill);
+                    } else if (skill instanceof Heal) {
+                        skill.setTransform(new Vector2(transform.position.x, transform.position.y));
+                        player.health = Math.min(player.health + skillComponent.type.get(SkillComponent.Type.HEAL), player.maxHealth);
                     } else {
                         System.out.println("DEFF");
                     }
 
                     player.cooldown.put(player.currSkill, skill.getCooldown());
-                    engine.addEntity((Entity) skill);
                 }
             } else {
                 System.out.println("Invoke First");
