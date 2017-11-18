@@ -104,6 +104,24 @@ public class GameModule implements Module {
         manager.load("parallax9.png", Texture.class);
         manager.load("parallax10.png", Texture.class);
 
+        //SelectCharacterScreenP1
+        manager.load("selectcharacter_P1.png", Texture.class);
+        manager.load("selectcharacter_P2.png", Texture.class);
+        manager.load("cat_inactive.png", Texture.class);
+        manager.load("cat_P1.png", Texture.class);
+        manager.load("cat_P2.png", Texture.class);
+        manager.load("frog_inactive.png", Texture.class);
+        manager.load("frog_P1.png", Texture.class);
+        manager.load("frog_P2.png", Texture.class);
+        manager.load("bear_inactive.png", Texture.class);
+        manager.load("bear_P1.png", Texture.class);
+        manager.load("bear_P2.png", Texture.class);
+        manager.load("panda_inactive.png", Texture.class);
+        manager.load("panda_P1.png", Texture.class);
+        manager.load("panda_P2.png", Texture.class);
+        manager.load("Play_active_stroke.png", Texture.class);
+        manager.load("Play_inactive_stroke.png", Texture.class);
+
         //InstructionScreen
         manager.load("instruction1.png", Texture.class);
         manager.load("instruction2.png", Texture.class);
