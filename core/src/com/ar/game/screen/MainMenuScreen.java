@@ -178,10 +178,8 @@ public class MainMenuScreen extends ScreenAdapter {
                 stage.addActor(playButtonActive);
             }
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.injector.getInstance(Systems.class).list.stream()
-                        .map(systemClass -> game.injector.getInstance(systemClass))
-                        .forEach(entitySystem -> game.engine.addSystem(entitySystem));
-                game.setScreen(game.injector.getInstance(PlayScreen.class));
+                game.dispose();
+                game.setScreen(game.injector.getInstance(SelectCharacterScreenP1.class));
                 return true;
             }
         });
@@ -192,10 +190,8 @@ public class MainMenuScreen extends ScreenAdapter {
                 stage.addActor(playButtonInactive);
             }
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.injector.getInstance(Systems.class).list.stream()
-                        .map(systemClass -> game.injector.getInstance(systemClass))
-                        .forEach(entitySystem -> game.engine.addSystem(entitySystem));
-                game.setScreen(game.injector.getInstance(PlayScreen.class));
+                game.dispose();
+                game.setScreen(game.injector.getInstance(SelectCharacterScreenP1.class));
                 return true;
             }
         });
