@@ -201,7 +201,7 @@ public class InstructionScreen extends ScreenAdapter {
             homeButtonInactive.remove();
             homeButtonActive.remove();
         }
-        batch.draw(showImage, 0, 0, showImage.getWidth(), showImage.getHeight());
+        batch.draw(showImage, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.end();
         stage.draw();
     }
