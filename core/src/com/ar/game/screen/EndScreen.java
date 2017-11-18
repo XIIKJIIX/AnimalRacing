@@ -27,6 +27,8 @@ public class EndScreen extends ScreenAdapter {
     private Texture homeActive;
     private Texture retryInactive;
     private Texture retryActive;
+    private Texture player1;
+    private Texture player2;
 
     private ImageButton homeButtonInactive;
     private ImageButton homeButtonActive;
@@ -48,6 +50,8 @@ public class EndScreen extends ScreenAdapter {
         homeActive = manager.get("Home_active.png", Texture.class);
         retryInactive = manager.get("Retry_inactive.png", Texture.class);
         retryActive = manager.get("Retry_active.png", Texture.class);
+        player1 = manager.get("cat_inactive.png", Texture.class);
+        player2 = manager.get("frog_inactive.png", Texture.class);
     }
 
     @Override
@@ -136,10 +140,12 @@ public class EndScreen extends ScreenAdapter {
         batch.begin();
         if (true) { //player1 win
             batch.draw(player1win, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        }
+            }
         else {
             batch.draw(player2win, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         }
+        batch.draw(player1, Gdx.graphics.getWidth()/2 - player1.getWidth()/2 - Gdx.graphics.getWidth()/4, Gdx.graphics.getHeight()/2 + player1.getHeight()/2);
+        batch.draw(player2, Gdx.graphics.getWidth()/2 - player2.getWidth()/2 - Gdx.graphics.getWidth()/4, Gdx.graphics.getHeight()/2 - player2.getHeight()/2);
         batch.end();
         stage.act();
         stage.draw();
