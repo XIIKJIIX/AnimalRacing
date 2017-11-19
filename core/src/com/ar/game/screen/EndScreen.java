@@ -19,6 +19,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.google.inject.Inject;
 
+import java.io.File;
+import java.util.ArrayList;
+
 public class EndScreen extends ScreenAdapter {
 
     private Texture player1win;
@@ -119,10 +122,7 @@ public class EndScreen extends ScreenAdapter {
                 stage.addActor(retryButtonActive);
             }
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.injector.getInstance(Systems.class).list.stream()
-                        .map(systemClass -> game.injector.getInstance(systemClass))
-                        .forEach(entitySystem -> game.engine.addSystem(entitySystem));
-                game.setScreen(game.injector.getInstance(PlayScreen.class));
+                restartApplication();
                 return true;
             }
         });
@@ -133,10 +133,7 @@ public class EndScreen extends ScreenAdapter {
                 stage.addActor(retryButtonInactive);
             }
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.injector.getInstance(Systems.class).list.stream()
-                        .map(systemClass -> game.injector.getInstance(systemClass))
-                        .forEach(entitySystem -> game.engine.addSystem(entitySystem));
-                game.setScreen(game.injector.getInstance(PlayScreen.class));
+                restartApplication();
                 return true;
             }
         });
@@ -199,5 +196,27 @@ public class EndScreen extends ScreenAdapter {
     public void dispose() {
         stage.dispose();
         batch.dispose();
+    }
+    public void restartApplication()
+    {
+        final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
+        try {
+            File currentJar = new File(PlayScreen.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+            if(!currentJar.getName().endsWith(".jar")) {
+                System.out.println("not jar so Quit instead");
+                Gdx.app.exit();
+            }
+            final ArrayList<String> command = new ArrayList<>();
+            command.add(javaBin);
+            command.add("-jar");
+            command.add(currentJar.getPath());
+
+            final ProcessBuilder builder = new ProcessBuilder(command);
+            builder.start();
+            System.exit(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }
