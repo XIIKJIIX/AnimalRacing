@@ -249,6 +249,7 @@ public class MainMenuScreen extends ScreenAdapter {
     public void show(){
         stage = new Stage(new ScreenViewport());
         Composition(game);
+        music.setLooping(true);
         music.play();
         Gdx.input.setInputProcessor(stage);
     }
