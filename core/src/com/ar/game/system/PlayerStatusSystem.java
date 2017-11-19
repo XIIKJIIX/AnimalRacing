@@ -16,12 +16,11 @@ import com.google.inject.Inject;
 
 import java.util.HashMap;
 
-public class PlayerStatusSystem extends IteratingSystem{
+public class PlayerStatusSystem extends IteratingSystem {
     private OrthographicCamera camera;
     private SpriteBatch batch;
     private Texture playerSkill;
     private AssetManager manager;
-    BitmapFont font = new BitmapFont();
     HashMap<PlayerComponent.Orb, Texture> orbMap = new HashMap<>();
     private HashMap<String, Texture> textureSkillMapper = new HashMap<>();
 
@@ -37,8 +36,6 @@ public class PlayerStatusSystem extends IteratingSystem{
         textureSkillMapper.put("[QUARZ, EXORT]", manager.get("skills/treetop.png", Texture.class));
         orbMap.put(PlayerComponent.Orb.QUARZ, manager.get("skills/quarz.png", Texture.class));
         orbMap.put(PlayerComponent.Orb.EXORT, manager.get("skills/exort.png", Texture.class));
-        font.setColor(Color.WHITE);
-        font.getData().setScale(0.09f, 0.09f);
     }
 
     @Override
@@ -55,7 +52,6 @@ public class PlayerStatusSystem extends IteratingSystem{
                         0.5f,
                         0.5f
                 );
-                font.draw(batch, String.format("%.0f", player.cooldown.get(player.currSkill)), camera.viewportWidth / 2, camera.viewportHeight / 3);
             } else {
                 batch.draw(
                         playerSkill,
