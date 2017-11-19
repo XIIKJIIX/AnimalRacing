@@ -28,8 +28,6 @@ public class EndScreen extends ScreenAdapter {
     private Texture player2win;
     private Texture homeInactive;
     private Texture homeActive;
-    private Texture retryInactive;
-    private Texture retryActive;
     private Texture player1;
     private Texture player2;
     private Texture catInactive;
@@ -39,8 +37,6 @@ public class EndScreen extends ScreenAdapter {
 
     private ImageButton homeButtonInactive;
     private ImageButton homeButtonActive;
-    private ImageButton retryButtonInactive;
-    private ImageButton retryButtonActive;
     private ImageButton player1Image;
     private ImageButton player2Image;
     private ImageButton player1winImage;
@@ -59,8 +55,6 @@ public class EndScreen extends ScreenAdapter {
         player2win = manager.get("endscreen_player2win.png", Texture.class);
         homeInactive = manager.get("Home_inactive.png", Texture.class);
         homeActive = manager.get("Home_active.png", Texture.class);
-        retryInactive = manager.get("Retry_inactive.png", Texture.class);
-        retryActive = manager.get("Retry_active.png", Texture.class);
         catInactive = manager.get("cat_inactive.png", Texture.class);
         frogInactive = manager.get("frog_inactive.png", Texture.class);
         bearInactive = manager.get("bear_inactive.png", Texture.class);
@@ -75,24 +69,13 @@ public class EndScreen extends ScreenAdapter {
 
         homeButtonInactive = new ImageButton(new TextureRegionDrawable(new TextureRegion(homeInactive)));
         homeButtonActive = new ImageButton(new TextureRegionDrawable(new TextureRegion(homeActive)));
-        retryButtonInactive = new ImageButton(new TextureRegionDrawable(new TextureRegion(retryInactive)));
-        retryButtonActive = new ImageButton(new TextureRegionDrawable(new TextureRegion(retryActive)));
 
         homeButtonInactive.setHeight(Gdx.graphics.getHeight()/6);
         homeButtonInactive.setWidth(Gdx.graphics.getHeight()/6);
         homeButtonActive.setHeight(Gdx.graphics.getHeight()/6);
         homeButtonActive.setWidth(Gdx.graphics.getHeight()/6);
-
-        retryButtonInactive.setHeight(Gdx.graphics.getHeight()/6);
-        retryButtonInactive.setWidth(Gdx.graphics.getHeight()/6);
-        retryButtonActive.setHeight(Gdx.graphics.getHeight()/6);
-        retryButtonActive.setWidth(Gdx.graphics.getHeight()/6);
-
-        homeButtonInactive.setPosition(Gdx.graphics.getWidth()/2 - homeButtonInactive.getWidth()/2 - Gdx.graphics.getWidth()/5, Gdx.graphics.getHeight()/6);
-        retryButtonInactive.setPosition(Gdx.graphics.getWidth()/2 - retryButtonInactive.getWidth()/2 + Gdx.graphics.getWidth()/5, Gdx.graphics.getHeight()/6);
-        homeButtonActive.setPosition(Gdx.graphics.getWidth()/2 - homeButtonActive.getWidth()/2 - Gdx.graphics.getWidth()/5, Gdx.graphics.getHeight()/6);
-        retryButtonActive.setPosition(Gdx.graphics.getWidth()/2 - retryButtonActive.getWidth()/2 + Gdx.graphics.getWidth()/5, Gdx.graphics.getHeight()/6);
-
+        homeButtonInactive.setPosition(Gdx.graphics.getWidth()/2 - homeButtonInactive.getWidth()/2, Gdx.graphics.getHeight()/6);
+        homeButtonActive.setPosition(Gdx.graphics.getWidth()/2 - homeButtonActive.getWidth()/2, Gdx.graphics.getHeight()/6);
 
         homeButtonInactive.addListener(new ClickListener() {
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor){
@@ -117,26 +100,6 @@ public class EndScreen extends ScreenAdapter {
             }
         });
 
-        retryButtonInactive.addListener(new ClickListener() {
-            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor){
-                stage.addActor(retryButtonActive);
-            }
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                restartApplication();
-                return true;
-            }
-        });
-
-        retryButtonActive.addListener(new ClickListener() {
-            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor){
-                retryButtonActive.remove();
-                stage.addActor(retryButtonInactive);
-            }
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                restartApplication();
-                return true;
-            }
-        });
         if (SelectCharacterScreenP1.characterP1 == "cat"){
             player1 = catInactive;
         }
@@ -186,7 +149,6 @@ public class EndScreen extends ScreenAdapter {
         player2Image.setPosition(Gdx.graphics.getWidth()/2 - player1.getWidth()/2 - Gdx.graphics.getWidth()/4, Gdx.graphics.getHeight()/2 - player1.getHeight()/2);
         stage.addActor(player2Image);
         stage.addActor(homeButtonInactive);
-        stage.addActor(retryButtonInactive);
         batch.end();
         stage.act();
         stage.draw();
@@ -196,27 +158,5 @@ public class EndScreen extends ScreenAdapter {
     public void dispose() {
         stage.dispose();
         batch.dispose();
-    }
-    public void restartApplication()
-    {
-        final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
-        try {
-            File currentJar = new File(PlayScreen.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-            if(!currentJar.getName().endsWith(".jar")) {
-                System.out.println("not jar so Quit instead");
-                Gdx.app.exit();
-            }
-            final ArrayList<String> command = new ArrayList<>();
-            command.add(javaBin);
-            command.add("-jar");
-            command.add(currentJar.getPath());
-
-            final ProcessBuilder builder = new ProcessBuilder(command);
-            builder.start();
-            System.exit(0);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
     }
 }

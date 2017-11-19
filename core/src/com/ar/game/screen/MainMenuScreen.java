@@ -21,6 +21,8 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.google.inject.Inject;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.util.ArrayList;
 
 public class MainMenuScreen extends ScreenAdapter {
 
@@ -183,8 +185,7 @@ public class MainMenuScreen extends ScreenAdapter {
                 stage.addActor(playButtonActive);
             }
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.dispose();
-                game.setScreen(game.injector.getInstance(SelectCharacterScreenP1.class));
+                restartApplication();
                 return true;
             }
         });
@@ -195,8 +196,7 @@ public class MainMenuScreen extends ScreenAdapter {
                 stage.addActor(playButtonInactive);
             }
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.dispose();
-                game.setScreen(game.injector.getInstance(SelectCharacterScreenP1.class));
+                restartApplication();
                 return true;
             }
         });
@@ -272,6 +272,29 @@ public class MainMenuScreen extends ScreenAdapter {
         stage.dispose();
         batch.dispose();
         music.dispose();
+    }
+
+    public void restartApplication()
+    {
+        final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
+        try {
+            File currentJar = new File(PlayScreen.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+            if(!currentJar.getName().endsWith(".jar")) {
+                System.out.println("not jar so Quit instead");
+                Gdx.app.exit();
+            }
+            final ArrayList<String> command = new ArrayList<>();
+            command.add(javaBin);
+            command.add("-jar");
+            command.add(currentJar.getPath());
+
+            final ProcessBuilder builder = new ProcessBuilder(command);
+            builder.start();
+            System.exit(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 }
