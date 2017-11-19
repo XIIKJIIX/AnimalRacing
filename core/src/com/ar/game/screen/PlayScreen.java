@@ -99,6 +99,7 @@ public class PlayScreen extends ScreenAdapter {
         tiledMap = new TmxMapLoader().load("map.tmx");
         tmr = new OrthogonalTiledMapRenderer(tiledMap, (float) 1 / PPM);
         MapBuilder.buildShapes(tiledMap, PPM, world, "ground", engine);
+        MapBuilder.buildShapes(tiledMap, PPM, world, "box", engine);
     }
 
     @Override
