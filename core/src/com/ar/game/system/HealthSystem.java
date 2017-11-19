@@ -44,7 +44,7 @@ public class HealthSystem extends IteratingSystem {
         } else {
             batch.setColor(Color.RED);
         }
-        batch.draw(healthBar, transform.position.x - data.width, transform.position.y + 0.35f, data.width*2*((healthPercent)), 0.05f);
+        batch.draw(healthBar, transform.position.x - data.width, transform.position.y + data.height + 0.35f, data.width*2*((healthPercent)), 0.05f);
         batch.setColor(Color.WHITE);
     }
 

@@ -65,17 +65,18 @@ public class GameModule implements Module {
     public Systems systems() {
         return new Systems(Arrays.asList(
                 CollisionSystem.class,
-                RenderingSystem.class,
                 PlayerControlSystem.class,
                 PhysicsDebugSystem.class,
                 PhysicsSystem.class,
                 PhysicsSynchronizationSystem.class,
-                CameraSystem.class,
-                HealthSystem.class,
                 DyingSystem.class,
 //                CameraSystem.class,
                 HealthSystem.class,
-                AnimateSystem.class
+                AnimateSystem.class,
+                PlayerStatusSystem.class,
+                CleanupSystem.class,
+                SkillUpdateSystem.class,
+                StateUpdateSystem.class
         ));
     }
 

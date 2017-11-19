@@ -3,28 +3,28 @@ size: 1416, 656
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-pandarun1
+pandarun0
   rotate: false
   xy: 0, 0
   size: 354, 656
   orig: 354, 656
   offset: 0, 0
   index: -1
-pandarun2
+pandarun1
   rotate: false
   xy: 354, 0
   size: 354, 656
   orig: 354, 656
   offset: 0, 0
   index: -1
-pandarun3
+pandarun2
   rotate: false
   xy: 708, 0
   size: 354, 656
   orig: 354, 656
   offset: 0, 0
   index: -1
-pandarun4
+pandarun3
   rotate: false
   xy: 1062, 0
   size: 354, 656

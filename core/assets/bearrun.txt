@@ -3,28 +3,28 @@ size: 1416, 656
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-bearrun1
+bearrun0
   rotate: false
   xy: 0, 0
   size: 354, 656
   orig: 354, 656
   offset: 0, 0
   index: -1
-bearrun2
+bearrun1
   rotate: false
   xy: 354, 0
   size: 354, 656
   orig: 354, 656
   offset: 0, 0
   index: -1
-bearrun3
+bearrun2
   rotate: false
   xy: 708, 0
   size: 354, 656
   orig: 354, 656
   offset: 0, 0
   index: -1
-bearrun4
+bearrun3
   rotate: false
   xy: 1062, 0
   size: 354, 656

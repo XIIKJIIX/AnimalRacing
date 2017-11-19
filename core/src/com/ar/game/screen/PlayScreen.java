@@ -50,40 +50,48 @@ public class PlayScreen extends ScreenAdapter {
         this.batch = batch;
     }
 
+    private AnimationComponent getAnimate(String name) {
+        System.out.println(name);
+        TextureAtlas atlas = new TextureAtlas(name+"run.txt");
+        Array<TextureRegion> frames = new Array<>();
+        for (int i = 0; i < 4; i++) {
+            frames.add(new TextureRegion(atlas.findRegion(name+"run"+i), i, 0, 354, 656));
+        }
+        Animation player1Run = new Animation(0.1f, frames);
+        frames.clear();
+        frames.add(new TextureRegion(atlas.findRegion(name+"run0"), 0, 0, 354, 656));
+        Animation player1Normal = new Animation(0.1f, frames);
+        frames.clear();
+        atlas = new TextureAtlas(name+"run.txt");
+        for (int i = 0; i < 4; i++) {
+            frames.add(new TextureRegion(atlas.findRegion(name+"run"+i), i, 0, 354, 656));
+        }
+        Animation player1Jump = new Animation(0.1f, frames);
+        frames.clear();
+        HashMap<StateComponent.State, Animation> stateAnimation = new HashMap<>();
+        stateAnimation.put(NORMAL, player1Normal);
+        stateAnimation.put(JUMPING, player1Jump);
+        stateAnimation.put(MOVING, player1Run);
+        return new AnimationComponent(stateAnimation);
+    }
+
     private void createEntities() {
         Entity player1 = new Player(
                 world,
                 new PlayerComponent(LEFT, RIGHT, UP, SHIFT_RIGHT, 300F, ENTER, PERIOD, SLASH),
                 new TypeComponent(TypeComponent.PLAYER),
-                new DataComponent(20F / PPM, 20F / PPM, "Player1")
+                new DataComponent(40F / PPM, 16F / PPM, "Player1")
         );
-        TextureAtlas atlas = new TextureAtlas("bear_all.txt");
-        Array<TextureRegion> frames = new Array<>();
-        for (int i = 0; i < 4; i++) {
-            frames.add(new TextureRegion(atlas.findRegion("bear_run"), i, 0, 160, 273));
-        }
-        Animation player1Run = new Animation(0.1f, frames);
-        frames.clear();
-        for (int i = 0; i < 4; i++) {
-            frames.add(new TextureRegion(atlas.findRegion("bear_jump"), i, 0, 160, 273));
-        }
-        Animation player1Jump = new Animation(0.1f, frames);
-        frames.clear();
-        frames.add(new TextureRegion(atlas.findRegion("bear_run"), 0, 0, 160, 273));
-        Animation player1Normal = new Animation(0.1f, frames);
-        HashMap<StateComponent.State, Animation> stateAnimation = new HashMap<>();
-        stateAnimation.put(NORMAL, player1Normal);
-        stateAnimation.put(JUMPING, player1Jump);
-        stateAnimation.put(MOVING, player1Run);
-        player1.add(new AnimationComponent(stateAnimation));
-        frames.clear();
+        player1.add(getAnimate(SelectCharacterScreenP1.characterP1));
         engine.addEntity(player1);
-        engine.addEntity(new Player(
+        Entity player2 = new Player(
                 world,
                 new PlayerComponent(A, D, W, Q, 300F, E, Z, X),
                 new TypeComponent(TypeComponent.PLAYER),
-                new DataComponent(20F / PPM, 20F / PPM, "Player2")
-        ));
+                new DataComponent(40F / PPM, 16F / PPM, "Player2")
+        );
+        player2.add(getAnimate(SelectCharacterScreenP2.characterP2));
+        engine.addEntity(player2);
 
     }
 

@@ -104,13 +104,13 @@ public class AnimateSystem extends IteratingSystem {
             );
         } else { // Player
             PlayerComponent player = Mapper.player.get(entity);
-            if (player.debufTime > 0) batch.setColor(Color.NAVY);
+            if (player.debufTime > 0) batch.setColor(0, 0, 0.9f, 1);
             batch.draw(
                     region,
-                    transform.position.x - (data.width / 2) - 0.15f,
-                    transform.position.y - (data.height / 2) - 0.15f,
-                    width / PPM / 4,
-                    height / PPM / 4
+                    transform.position.x - (data.width / 2) - 0.2f,
+                    transform.position.y - (data.height / 2) - 0.2f,
+                    width / PPM / 8,
+                    height / PPM / 8
             );
         }
         batch.setColor(Color.WHITE);
