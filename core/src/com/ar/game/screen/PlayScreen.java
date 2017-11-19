@@ -41,6 +41,8 @@ public class PlayScreen extends ScreenAdapter {
     private KeyboardController controller = AnimalRacing.controller;
     private Texture bg = new Texture("game_background.png");
 
+    public static String winner, looser, winnerName;
+
     @Inject
     public PlayScreen(World world,
                       OrthographicCamera camera,

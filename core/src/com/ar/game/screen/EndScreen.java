@@ -174,7 +174,7 @@ public class EndScreen extends ScreenAdapter {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
-        if (true) { //player1 win
+        if (PlayScreen.winnerName.equals("Player2")) { //player1 win (Swap Case to fix)
             player1winImage.setHeight(Gdx.graphics.getHeight());
             player1winImage.setPosition(0,0);
             stage.addActor(player1winImage);
