@@ -45,6 +45,7 @@ public class SelectCharacterScreenP1 extends ScreenAdapter {
     private ImageButton homeButtonActive;
     private ImageButton nextButtonInactive;
     private ImageButton nextButtonActive;
+    private ImageButton selectCharacterImage;
 
     private Stage stage;
     private int checkClick=0;
@@ -78,6 +79,11 @@ public class SelectCharacterScreenP1 extends ScreenAdapter {
     @Override
     public void show(){
         stage = new Stage(new ScreenViewport());
+
+        selectCharacterImage = new ImageButton(new TextureRegionDrawable(new TextureRegion(selectCharacter)));
+        selectCharacterImage.setHeight(Gdx.graphics.getHeight());
+        selectCharacterImage.setPosition(0,0);
+        stage.addActor(selectCharacterImage);
 
         nextButtonInactive = new ImageButton(new TextureRegionDrawable(new TextureRegion(nextInactive)));
         nextButtonActive = new ImageButton(new TextureRegionDrawable(new TextureRegion(nextActive)));
@@ -268,7 +274,6 @@ public class SelectCharacterScreenP1 extends ScreenAdapter {
             });
         }
         batch.begin();
-        batch.draw(selectCharacter, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.end();
         stage.act();
         stage.draw();
