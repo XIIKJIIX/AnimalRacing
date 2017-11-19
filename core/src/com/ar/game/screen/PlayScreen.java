@@ -64,9 +64,9 @@ public class PlayScreen extends ScreenAdapter {
         frames.add(new TextureRegion(atlas.findRegion(name+"run0"), 0, 0, 354, 656));
         Animation player1Normal = new Animation(0.1f, frames);
         frames.clear();
-        atlas = new TextureAtlas(name+"run.txt");
+        atlas = new TextureAtlas(name+"jump.txt");
         for (int i = 0; i < 4; i++) {
-            frames.add(new TextureRegion(atlas.findRegion(name+"run"+i), i, 0, 354, 656));
+            frames.add(new TextureRegion(atlas.findRegion(name+"jump"+i), i, 0, 354, 656));
         }
         Animation player1Jump = new Animation(0.1f, frames);
         frames.clear();
