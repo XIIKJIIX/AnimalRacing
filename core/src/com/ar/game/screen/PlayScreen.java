@@ -11,6 +11,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -38,6 +39,7 @@ public class PlayScreen extends ScreenAdapter {
     private Engine engine;
     private SpriteBatch batch;
     private KeyboardController controller = AnimalRacing.controller;
+    private Texture bg = new Texture("game_background.png");
 
     @Inject
     public PlayScreen(World world,
@@ -115,6 +117,9 @@ public class PlayScreen extends ScreenAdapter {
         super.render(delta);
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        batch.begin();
+        batch.draw(bg, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        batch.end();
         engine.update(Gdx.graphics.getDeltaTime());
         tmr.setView(camera);
         tmr.render();
