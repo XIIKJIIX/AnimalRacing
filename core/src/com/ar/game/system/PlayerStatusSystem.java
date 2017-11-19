@@ -7,8 +7,10 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.google.inject.Inject;
 
@@ -19,6 +21,7 @@ public class PlayerStatusSystem extends IteratingSystem{
     private SpriteBatch batch;
     private Texture playerSkill;
     private AssetManager manager;
+    BitmapFont font = new BitmapFont();
     HashMap<PlayerComponent.Orb, Texture> orbMap = new HashMap<>();
     private HashMap<String, Texture> textureSkillMapper = new HashMap<>();
 
@@ -34,6 +37,8 @@ public class PlayerStatusSystem extends IteratingSystem{
         textureSkillMapper.put("[QUARZ, EXORT]", manager.get("skills/treetop.png", Texture.class));
         orbMap.put(PlayerComponent.Orb.QUARZ, manager.get("skills/quarz.png", Texture.class));
         orbMap.put(PlayerComponent.Orb.EXORT, manager.get("skills/exort.png", Texture.class));
+        font.setColor(Color.WHITE);
+        font.getData().setScale(0.09f, 0.09f);
     }
 
     @Override
@@ -50,6 +55,7 @@ public class PlayerStatusSystem extends IteratingSystem{
                         0.5f,
                         0.5f
                 );
+                font.draw(batch, String.format("%.0f", player.cooldown.get(player.currSkill)), camera.viewportWidth / 2, camera.viewportHeight / 3);
             } else {
                 batch.draw(
                         playerSkill,

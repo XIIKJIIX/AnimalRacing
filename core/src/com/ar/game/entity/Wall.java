@@ -24,7 +24,7 @@ public class Wall extends Entity implements Skill {
     public AnimationComponent animationComponent;
     public Body body;
     public Wall(World world) {
-        skill = new SkillComponent(SkillComponent.ShotType.OBJECT, SkillComponent.ON_HIT.GONE, 12f, 5f, 0.25f);
+        skill = new SkillComponent(SkillComponent.ShotType.OBJECT, SkillComponent.ON_HIT.GONE, 3f, 5f, 0.25f);
         skill.addSkill(SkillComponent.Type.DAMAGE, 100f);
         add(skill);
 

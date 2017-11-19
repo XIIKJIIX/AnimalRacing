@@ -25,7 +25,7 @@ public class Bomb extends Entity implements Skill {
     public Body body;
 
     public Bomb(World world) {
-        skill = new SkillComponent(SkillComponent.ShotType.PROJECTILE, SkillComponent.ON_HIT.GONE, 12f, 5f, 0.25f);
+        skill = new SkillComponent(SkillComponent.ShotType.PROJECTILE, SkillComponent.ON_HIT.GONE, 8f, 5f, 0.25f);
         skill.addSkill(SkillComponent.Type.DAMAGE, 100f);
         add(skill);
 

@@ -18,7 +18,7 @@ public class Heal extends Entity implements Skill {
     public Body body;
 
     public Heal() {
-        skill = new SkillComponent(SkillComponent.ShotType.PROJECTILE, SkillComponent.ON_HIT.GONE, 12f, 5f, 0.25f);
+        skill = new SkillComponent(SkillComponent.ShotType.PROJECTILE, SkillComponent.ON_HIT.GONE, 9f, 5f, 0.25f);
         skill.addSkill(SkillComponent.Type.HEAL, 75);
         add(skill);
 
