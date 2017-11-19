@@ -63,6 +63,8 @@ public class MainMenuScreen extends ScreenAdapter {
 
     private Stage stage;
 
+    public static Music music = Gdx.audio.newMusic(Gdx.files.internal("theme.mp3"));
+
     @Inject
     public MainMenuScreen (AssetManager manager, SpriteBatch batch, AnimalRacing game){
         this.batch = batch;
@@ -247,6 +249,7 @@ public class MainMenuScreen extends ScreenAdapter {
     public void show(){
         stage = new Stage(new ScreenViewport());
         Composition(game);
+        music.play();
         Gdx.input.setInputProcessor(stage);
     }
 
@@ -265,6 +268,7 @@ public class MainMenuScreen extends ScreenAdapter {
     public void dispose() {
         stage.dispose();
         batch.dispose();
+        music.dispose();
     }
 
 }

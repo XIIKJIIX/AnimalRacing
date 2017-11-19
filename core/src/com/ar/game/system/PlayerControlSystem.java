@@ -86,7 +86,7 @@ public class PlayerControlSystem extends IteratingSystem {
         if (Gdx.input.isKeyJustPressed(player.castKey)) {
             if (player.currSkill != null) {
                 String skillOrb = player.currSkill;
-                if (player.cooldown.get(skillOrb) < 0) {
+                if (player.cooldown.get(skillOrb) > 0) {
                     System.out.println(player.currSkill + " is on cooldown. "+player.cooldown.get(skillOrb));
                 } else {
                     float toLeft = 1;

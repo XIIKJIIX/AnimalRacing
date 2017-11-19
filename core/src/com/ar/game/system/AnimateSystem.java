@@ -109,8 +109,8 @@ public class AnimateSystem extends IteratingSystem {
                     region,
                     transform.position.x - (data.width / 2) - 0.2f,
                     transform.position.y - (data.height / 2) - 0.2f,
-                    width / PPM / 8,
-                    height / PPM / 8
+                    width / PPM / 9,
+                    height / PPM / 9
             );
         }
         batch.setColor(Color.WHITE);

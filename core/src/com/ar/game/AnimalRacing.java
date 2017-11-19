@@ -14,6 +14,7 @@ public class AnimalRacing extends Game {
     public static int V_HEIGHT = 480;
     public static int SCALE = 2;
 
+    public static String winner;
     public SpriteBatch batch;
     public Engine engine = new Engine();
     public static KeyboardController controller = new KeyboardController();
