@@ -1,0 +1,33 @@
+frogrun.png
+size: 1352, 656
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+frogrun0
+  rotate: false
+  xy: 0, 0
+  size: 338, 656
+  orig: 338, 656
+  offset: 0, 0
+  index: -1
+frogrun1
+  rotate: false
+  xy: 338, 0
+  size: 338, 656
+  orig: 338, 656
+  offset: 0, 0
+  index: -1
+frogrun2
+  rotate: false
+  xy: 676, 0
+  size: 338, 656
+  orig: 338, 656
+  offset: 0, 0
+  index: -1
+frogrun3
+  rotate: false
+  xy: 1014, 0
+  size: 338, 656
+  orig: 338, 656
+  offset: 0, 0
+  index: -1
