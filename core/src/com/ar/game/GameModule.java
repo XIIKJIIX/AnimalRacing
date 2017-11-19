@@ -96,6 +96,7 @@ public class GameModule implements Module {
         manager.load("sounds/heal.mp3", Sound.class);
         manager.load("sounds/Crystal_Maiden_preattack2.mp3", Sound.class);
         manager.load("sounds/Cold_Embrace_target.mp3", Sound.class);
+        manager.load("sounds/tick.mp3", Sound.class);
         
         //MainMenuScreen
         manager.load("Play_active.png", Texture.class);

@@ -39,6 +39,7 @@ public class PlayerControlSystem extends IteratingSystem {
         sound.put("invoke", manager.get("sounds/Invoke.mp3", Sound.class));
         sound.put("heal", manager.get("sounds/heal.mp3", Sound.class));
         sound.put("use_iceball", manager.get("sounds/Crystal_Maiden_preattack2.mp3", Sound.class));
+        sound.put("on_cd", manager.get("sounds/tick.mp3", Sound.class));
     }
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
@@ -79,7 +80,7 @@ public class PlayerControlSystem extends IteratingSystem {
             );
 
         if (controller.KEY_MAP.get(player.upKey) && (state.get() == NORMAL || state.get() == MOVING)) {
-            physics.body.applyLinearImpulse(0, 4F, worldCenter.x, worldCenter.y, true);
+            physics.body.applyLinearImpulse(0, 4.5F, worldCenter.x, worldCenter.y, true);
             state.set(JUMPING);
         }
 
@@ -88,6 +89,7 @@ public class PlayerControlSystem extends IteratingSystem {
                 String skillOrb = player.currSkill;
                 if (player.cooldown.get(skillOrb) > 0) {
                     System.out.println(player.currSkill + " is on cooldown. "+player.cooldown.get(skillOrb));
+                    sound.get("on_cd").play(0.7f);
                 } else {
                     float toLeft = 1;
                     Skill skill = SkillMapper.map(player.currSkill);
