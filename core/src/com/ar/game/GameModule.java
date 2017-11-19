@@ -4,6 +4,8 @@ import com.ar.game.handler.CollisionDetector;
 import com.ar.game.system.*;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -93,6 +95,11 @@ public class GameModule implements Module {
         manager.load("skills/treetop.png", Texture.class);
         manager.load("skills/quarz.png", Texture.class);
         manager.load("skills/exort.png", Texture.class);
+        manager.load("sounds/Invoke.mp3", Sound.class);
+        manager.load("sounds/explosion.mp3", Sound.class);
+        manager.load("sounds/heal.mp3", Sound.class);
+        manager.load("sounds/Crystal_Maiden_preattack2.mp3", Sound.class);
+        manager.load("sounds/Cold_Embrace_target.mp3", Sound.class);
         manager.finishLoading();
         return manager;
     }

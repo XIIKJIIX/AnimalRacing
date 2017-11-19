@@ -8,18 +8,26 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.World;
 import com.google.inject.Inject;
 
+import java.util.HashMap;
+
 public class CollisionSystem extends IteratingSystem {
     private World world;
     private Engine engine;
+    private AssetManager manager;
+    private HashMap<String, Sound> sound = new HashMap<>();
     @Inject
-    public CollisionSystem(Engine engine, World world) {
+    public CollisionSystem(Engine engine, World world, AssetManager manager) {
         super(Family.all(CollisionComponent.class).get());
         this.engine = engine;
         this.world = world;
+        sound.put("slow", manager.get("sounds/Cold_Embrace_target.mp3", Sound.class));
+        sound.put("bomb", manager.get("sounds/explosion.mp3", Sound.class));
     }
 
     @Override
@@ -47,6 +55,7 @@ public class CollisionSystem extends IteratingSystem {
                             StateComponent skillState = Mapper.state.get(entity);
                             PhysicsComponent skillPhysics = Mapper.physics.get(entity);
                             if (entity instanceof Bomb) {
+                                sound.get("bomb").play(0.75f);
                                 world.destroyBody(skillPhysics.body);
                                 skillState.set(StateComponent.State.HIT);
                             }
@@ -70,7 +79,8 @@ public class CollisionSystem extends IteratingSystem {
                     break;
                 case SLOW:
                     player.spRate -= v;
-                    player.debufTime = 3;
+                    player.debufTime = 5;
+                    sound.get("slow").play(0.6f);
                     break;
                 case DAMAGE:
                     player.health = Math.max(0, player.health-v);

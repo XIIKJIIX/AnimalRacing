@@ -14,20 +14,31 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.google.inject.Inject;
 
+import java.util.HashMap;
+
 public class PlayerControlSystem extends IteratingSystem {
     KeyboardController controller = AnimalRacing.controller;
     private Engine engine;
     private World world;
+    private AssetManager manager;
+    private HashMap<String, Sound> sound = new HashMap<>();
     @Inject
-    public PlayerControlSystem(World world, Engine engine) {
+    public PlayerControlSystem(World world, Engine engine, AssetManager manager) {
         super(Family.all(PlayerComponent.class).get());
         this.world = world;
+        this.manager = manager;
         this.engine = engine;
+        sound.put("invoke", manager.get("sounds/Invoke.mp3", Sound.class));
+        sound.put("heal", manager.get("sounds/heal.mp3", Sound.class));
+        sound.put("use_iceball", manager.get("sounds/Crystal_Maiden_preattack2.mp3", Sound.class));
     }
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
@@ -85,10 +96,10 @@ public class PlayerControlSystem extends IteratingSystem {
                         skillComponent.isRight = false;
                         toLeft = -1;
                     }
-
                     if (skill instanceof IceBall) {
                         skill.setTransform(new Vector2(transform.position.x + toLeft*(30f/PPM), transform.position.y));
                         engine.addEntity((Entity) skill);
+                        sound.get("use_iceball").play(0.5f);
                     } else if (skill instanceof Bomb) {
                         skill.setTransform(new Vector2(transform.position.x + toLeft*(40f/PPM), transform.position.y));
                         PhysicsComponent skillPhysics = Mapper.physics.get((Entity) skill);
@@ -97,6 +108,7 @@ public class PlayerControlSystem extends IteratingSystem {
                     } else if (skill instanceof Heal) {
                         skill.setTransform(new Vector2(transform.position.x, transform.position.y));
                         player.health = Math.min(player.health + skillComponent.type.get(SkillComponent.Type.HEAL), player.maxHealth);
+                        sound.get("heal").play(0.5f);
                     } else if (skill instanceof Wall) {
                         skill.setTransform(new Vector2(transform.position.x - 0.4f, transform.position.y + 0.2f));
                         engine.addEntity((Entity) skill);
@@ -125,6 +137,7 @@ public class PlayerControlSystem extends IteratingSystem {
         if (Gdx.input.isKeyJustPressed(player.invokeKey)) {
             player.currSkill = player.orbs.toString();
             System.out.println(player.currSkill);
+            sound.get("invoke").play(0.4f);
         }
 
         player.cooldown.replaceAll((k, v) -> Math.max(v - deltaTime, 0));
