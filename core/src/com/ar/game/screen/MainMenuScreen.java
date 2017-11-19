@@ -1,23 +1,18 @@
 package com.ar.game.screen;
 
 import com.ar.game.AnimalRacing;
-import com.ar.game.system.Systems;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -164,7 +159,7 @@ public class MainMenuScreen extends ScreenAdapter {
             }
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 game.dispose();
-                game.setScreen(game.injector.getInstance(InstructionScreen.class));
+                game.setScreen(game.injector.getInstance(InstructionScreen1.class));
                 return true;
             }
         });
@@ -176,7 +171,7 @@ public class MainMenuScreen extends ScreenAdapter {
             }
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 game.dispose();
-                game.setScreen(game.injector.getInstance(InstructionScreen.class));
+                game.setScreen(game.injector.getInstance(InstructionScreen1.class));
                 return true;
             }
         });
