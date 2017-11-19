@@ -38,6 +38,10 @@ public class EndScreen extends ScreenAdapter {
     private ImageButton homeButtonActive;
     private ImageButton retryButtonInactive;
     private ImageButton retryButtonActive;
+    private ImageButton player1Image;
+    private ImageButton player2Image;
+    private ImageButton player1winImage;
+    private ImageButton player2winImage;
 
     private Stage stage;
 
@@ -63,6 +67,9 @@ public class EndScreen extends ScreenAdapter {
     @Override
     public void show(){
         stage = new Stage(new ScreenViewport());
+        player1winImage = new ImageButton(new TextureRegionDrawable(new TextureRegion(player1win)));
+        player2winImage = new ImageButton(new TextureRegionDrawable(new TextureRegion(player2win)));
+
         homeButtonInactive = new ImageButton(new TextureRegionDrawable(new TextureRegion(homeInactive)));
         homeButtonActive = new ImageButton(new TextureRegionDrawable(new TextureRegion(homeActive)));
         retryButtonInactive = new ImageButton(new TextureRegionDrawable(new TextureRegion(retryInactive)));
@@ -82,8 +89,7 @@ public class EndScreen extends ScreenAdapter {
         retryButtonInactive.setPosition(Gdx.graphics.getWidth()/2 - retryButtonInactive.getWidth()/2 + Gdx.graphics.getWidth()/5, Gdx.graphics.getHeight()/6);
         homeButtonActive.setPosition(Gdx.graphics.getWidth()/2 - homeButtonActive.getWidth()/2 - Gdx.graphics.getWidth()/5, Gdx.graphics.getHeight()/6);
         retryButtonActive.setPosition(Gdx.graphics.getWidth()/2 - retryButtonActive.getWidth()/2 + Gdx.graphics.getWidth()/5, Gdx.graphics.getHeight()/6);
-        stage.addActor(homeButtonInactive);
-        stage.addActor(retryButtonInactive);
+
 
         homeButtonInactive.addListener(new ClickListener() {
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor){
@@ -134,11 +140,6 @@ public class EndScreen extends ScreenAdapter {
                 return true;
             }
         });
-
-        Gdx.input.setInputProcessor(stage);
-
-        // choose the characters
-
         if (SelectCharacterScreenP1.characterP1 == "cat"){
             player1 = catInactive;
         }
@@ -163,6 +164,9 @@ public class EndScreen extends ScreenAdapter {
         else if (SelectCharacterScreenP2.characterP2 == "panda") {
             player2 = pandaInactive;
         }
+        player1Image = new ImageButton(new TextureRegionDrawable(new TextureRegion(player1)));
+        player2Image = new ImageButton(new TextureRegionDrawable(new TextureRegion(player2)));
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
@@ -171,14 +175,21 @@ public class EndScreen extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
         if (true) { //player1 win
-            batch.draw(player1win, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-            }
-        else {
-            batch.draw(player2win, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            player1winImage.setHeight(Gdx.graphics.getHeight());
+            player1winImage.setPosition(0,0);
+            stage.addActor(player1winImage);
         }
-
-        batch.draw(player1, Gdx.graphics.getWidth()/2 - player1.getWidth()/2 - Gdx.graphics.getWidth()/4, Gdx.graphics.getHeight()/2 + player1.getHeight()/2);
-        batch.draw(player2, Gdx.graphics.getWidth()/2 - player2.getWidth()/2 - Gdx.graphics.getWidth()/4, Gdx.graphics.getHeight()/2 - player2.getHeight()/2);
+        else {
+            player2winImage.setHeight(Gdx.graphics.getHeight());
+            player2winImage.setPosition(0,0);
+            stage.addActor(player2winImage);
+        }
+        player1Image.setPosition(Gdx.graphics.getWidth()/2 - player1.getWidth()/2 - Gdx.graphics.getWidth()/4, Gdx.graphics.getHeight()/2 + player1.getHeight()/2);
+        stage.addActor(player1Image);
+        player2Image.setPosition(Gdx.graphics.getWidth()/2 - player1.getWidth()/2 - Gdx.graphics.getWidth()/4, Gdx.graphics.getHeight()/2 - player1.getHeight()/2);
+        stage.addActor(player2Image);
+        stage.addActor(homeButtonInactive);
+        stage.addActor(retryButtonInactive);
         batch.end();
         stage.act();
         stage.draw();
