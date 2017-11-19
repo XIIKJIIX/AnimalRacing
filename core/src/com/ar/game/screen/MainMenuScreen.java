@@ -17,6 +17,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -55,6 +56,7 @@ public class MainMenuScreen extends ScreenAdapter {
     private Texture parallax10;
 
     private Texture logo;
+    private ImageButton logoImage;
 
     private SpriteBatch batch;
     private AnimalRacing game;
@@ -119,6 +121,12 @@ public class MainMenuScreen extends ScreenAdapter {
         parallaxBackground.setSize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         parallaxBackground.setSpeed(0.1);
         stage.addActor(parallaxBackground);
+
+        logoImage = new ImageButton(new TextureRegionDrawable(new TextureRegion(logo)));
+        logoImage.setWidth(Gdx.graphics.getWidth()*4/5);
+        logoImage.setPosition(Gdx.graphics.getWidth()/2-logoImage.getWidth()/2, (Gdx.graphics.getHeight()*2)/6);
+
+        stage.addActor(logoImage);
 
         playButtonInactive = new ImageButton(new TextureRegionDrawable(new TextureRegion(playButtonInactiveImage)));
         playButtonInactive.setHeight(Gdx.graphics.getHeight()/5);
@@ -261,7 +269,6 @@ public class MainMenuScreen extends ScreenAdapter {
         stage.act();
         stage.draw();
         batch.begin();
-        batch.draw(logo, Gdx.graphics.getWidth()/2-logo.getWidth()*3/8, (Gdx.graphics.getHeight()*2)/5, logo.getWidth()*3/4, logo.getHeight()*3/4);
         batch.end();
     }
 
