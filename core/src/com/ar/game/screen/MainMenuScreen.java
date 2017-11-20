@@ -185,7 +185,8 @@ public class MainMenuScreen extends ScreenAdapter {
                 stage.addActor(playButtonActive);
             }
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                restartApplication();
+                game.dispose();
+                game.setScreen(AnimalRacing.injector.getInstance(SelectCharacterScreenP1.class));
                 return true;
             }
         });
@@ -196,7 +197,8 @@ public class MainMenuScreen extends ScreenAdapter {
                 stage.addActor(playButtonInactive);
             }
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                restartApplication();
+                game.dispose();
+                game.setScreen(AnimalRacing.injector.getInstance(SelectCharacterScreenP1.class));
                 return true;
             }
         });
@@ -273,28 +275,4 @@ public class MainMenuScreen extends ScreenAdapter {
         batch.dispose();
         music.dispose();
     }
-
-    public void restartApplication()
-    {
-        final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
-        try {
-            File currentJar = new File(PlayScreen.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-            if(!currentJar.getName().endsWith(".jar")) {
-                System.out.println("not jar so Quit instead");
-                Gdx.app.exit();
-            }
-            final ArrayList<String> command = new ArrayList<>();
-            command.add(javaBin);
-            command.add("-jar");
-            command.add(currentJar.getPath());
-
-            final ProcessBuilder builder = new ProcessBuilder(command);
-            builder.start();
-            System.exit(0);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
 }

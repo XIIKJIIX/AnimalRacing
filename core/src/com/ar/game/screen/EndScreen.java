@@ -82,8 +82,7 @@ public class EndScreen extends ScreenAdapter {
                 stage.addActor(homeButtonActive);
             }
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.dispose();
-                game.setScreen(game.injector.getInstance(MainMenuScreen.class));
+                restartApplication();
                 return true;
             }
         });
@@ -94,8 +93,7 @@ public class EndScreen extends ScreenAdapter {
                 stage.addActor(homeButtonInactive);
             }
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                game.dispose();
-                game.setScreen(game.injector.getInstance(MainMenuScreen.class));
+                restartApplication();
                 return true;
             }
         });
@@ -158,5 +156,27 @@ public class EndScreen extends ScreenAdapter {
     public void dispose() {
         stage.dispose();
         batch.dispose();
+    }
+
+    private void restartApplication()
+    {
+        final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
+        try {
+            File currentJar = new File(PlayScreen.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+            if(!currentJar.getName().endsWith(".jar")) {
+                System.out.println("not jar so Quit instead");
+                Gdx.app.exit();
+            }
+            final ArrayList<String> command = new ArrayList<>();
+            command.add(javaBin);
+            command.add("-jar");
+            command.add(currentJar.getPath());
+
+            final ProcessBuilder builder = new ProcessBuilder(command);
+            builder.start();
+            System.exit(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
