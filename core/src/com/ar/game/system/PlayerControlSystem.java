@@ -80,7 +80,7 @@ public class PlayerControlSystem extends IteratingSystem {
             );
 
         if (controller.KEY_MAP.get(player.upKey) && (state.get() == NORMAL || state.get() == MOVING)) {
-            physics.body.applyLinearImpulse(0, 4.5F, worldCenter.x, worldCenter.y, true);
+            physics.body.applyLinearImpulse(0, 5.2F, worldCenter.x, worldCenter.y, true);
             state.set(JUMPING);
         }
 
