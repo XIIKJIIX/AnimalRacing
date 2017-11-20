@@ -44,6 +44,7 @@ public class PlayerStatusSystem extends IteratingSystem {
         DataComponent data = Mapper.data.get(entity);
         if (player.currSkill != null) {
             playerSkill = textureSkillMapper.get(player.currSkill);
+            if (player.cooldown.get(player.currSkill) > 0) batch.setColor(Color.RED);
             if (data.name.equals("Player2")) {
                 batch.draw( //Draw Skill
                         playerSkill,
@@ -62,6 +63,7 @@ public class PlayerStatusSystem extends IteratingSystem {
                 );
             }
         }
+        batch.setColor(Color.WHITE);
         if (data.name.equals("Player2")) {
             batch.draw( //Draw Orb1
                     orbMap.get(player.orbs.get(0)),
@@ -93,6 +95,7 @@ public class PlayerStatusSystem extends IteratingSystem {
                     0.5f
             );
         }
+        batch.setColor(Color.WHITE);
 
     }
 
