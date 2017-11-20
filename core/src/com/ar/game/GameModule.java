@@ -66,11 +66,11 @@ public class GameModule implements Module {
         return new Systems(Arrays.asList(
                 CollisionSystem.class,
                 PlayerControlSystem.class,
-                PhysicsDebugSystem.class,
+//                PhysicsDebugSystem.class,
                 PhysicsSystem.class,
                 PhysicsSynchronizationSystem.class,
                 DyingSystem.class,
-                CameraSystem.class,
+//                CameraSystem.class,
                 HealthSystem.class,
                 AnimateSystem.class,
                 PlayerStatusSystem.class,

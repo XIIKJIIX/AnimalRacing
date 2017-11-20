@@ -66,14 +66,14 @@ public class PlayerStatusSystem extends IteratingSystem {
         batch.setColor(Color.WHITE);
         if (data.name.equals("Player2")) {
             batch.draw( //Draw Orb1
-                    orbMap.get(player.orbs.get(0)),
+                    orbMap.get(player.orbs.get(1)),
                     camera.position.x - camera.viewportWidth / 2 + 0.5f,
                     camera.position.y + camera.viewportHeight / 3,
                     0.5f,
                     0.5f
             );
             batch.draw( //Draw Orb2
-                    orbMap.get(player.orbs.get(1)),
+                    orbMap.get(player.orbs.get(0)),
                     camera.position.x - camera.viewportWidth / 2 + 1f,
                     camera.position.y + camera.viewportHeight / 3,
                     0.5f,
